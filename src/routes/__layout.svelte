@@ -1,0 +1,17 @@
+
+<h1>Header</h1>
+<div id="main">
+	<section class="section pb-0 pt-0">
+		<div class="container">
+			<div class="box">
+				<slot />
+			</div>
+		</div>
+	</section>
+</div>
+
+<h1>Footer</h1>
+
+<style lang="scss" global>
+	@import '../scss/app.scss';
+</style>
