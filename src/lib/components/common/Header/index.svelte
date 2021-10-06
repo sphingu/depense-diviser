@@ -17,7 +17,7 @@
 	<div class="container">
 		<nav class="navbar">
 			<div class="navbar-brand">
-				<div class="navbar-item p-0 logo">diviser</div>
+				<div class="navbar-item p-0 logo">D-diviser</div>
 				<div class="navbar-burger" on:click={toggleMenuVisible}>
 					<span />
 					<span />

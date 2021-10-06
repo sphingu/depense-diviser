@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Header } from '$lib/components/common'
+	import { Header, Footer } from '$lib/components/common'
 </script>
 
 <Header />
@@ -13,7 +13,7 @@
 	</section>
 </div>
 
-<h1>Footer</h1>
+<Footer />
 
 <style lang="scss" global>
 	@import '../scss/app.scss';
