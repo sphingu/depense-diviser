@@ -1,5 +1,8 @@
+<script lang="ts">
+	import { Header } from '$lib/components/common'
+</script>
 
-<h1>Header</h1>
+<Header />
 <div id="main">
 	<section class="section pb-0 pt-0">
 		<div class="container">
