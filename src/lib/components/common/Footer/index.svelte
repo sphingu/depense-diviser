@@ -16,16 +16,16 @@
 	</div>
 </footer>
 
-<style lang="scss">
+<style>
 	footer {
 		background-color: transparent;
 		border-top: 1px dashed;
 		padding-top: 0;
 		padding-bottom: 0;
-		.container {
-			border-width: 0 1px;
-			border-style: none;
-			padding: 1em;
-		}
+	}
+	.container {
+		border-width: 0 1px;
+		border-style: none;
+		padding: 1em;
 	}
 </style>

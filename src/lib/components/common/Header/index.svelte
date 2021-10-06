@@ -2,7 +2,7 @@
 	import { page } from '$app/stores'
 	import { navigationItems } from './constants'
 
-	let isMenuVisible: boolean = false
+	let isMenuVisible = false
 
 	const toggleMenuVisible = () => {
 		isMenuVisible = !isMenuVisible
@@ -49,7 +49,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style>
 	section {
 		padding-bottom: 0;
 		padding-top: 0;
@@ -59,21 +59,19 @@
 		background-color: transparent;
 		border-width: 0 1px 0 1px;
 		border-style: none;
-		.navbar-burger {
-			height: auto;
-		}
-		.navbar-menu {
-			.navbar-item:hover {
-				background-color: rgba(0, 0, 0, 0.1);
-			}
-			.navbar-item.is-active {
-				background-color: black;
-				color: white;
-				span {
-					border-bottom: 2px solid;
-				}
-			}
-		}
+	}
+	.navbar-burger {
+		height: auto;
+	}
+	.navbar-item:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+	.navbar-item.is-active {
+		background-color: black;
+		color: white;
+	}
+	.navbar-item.is-active span {
+		border-bottom: 2px solid;
 	}
 	.logo {
 		font-size: 2.5em;
