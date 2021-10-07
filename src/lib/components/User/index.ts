@@ -1,3 +1,4 @@
-import AddEditUser from './AddEdit.svelte'
+import UserAddEdit from './AddEdit.svelte'
+import UserList from './List.svelte'
 
-export { AddEditUser }
+export { UserAddEdit, UserList }
