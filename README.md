@@ -1,4 +1,4 @@
-# Depense-Diviser
+# D-Diviser
 
 Web application to track split expenditure
 

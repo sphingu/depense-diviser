@@ -7,8 +7,9 @@ export const ValidationTypes = {
 	Email: 'email',
 	URL: 'url'
 } as const
-type IValidationTypesKeys = keyof typeof ValidationTypes
-export type IValidationTypes = typeof ValidationTypes[IValidationTypesKeys]
+// NOTE: Commented as not working in some cases
+// type IValidationTypesKeys = keyof typeof ValidationTypes
+// export type IValidationTypes = typeof ValidationTypes[IValidationTypesKeys]
 
 export const ValidationMessages = {
 	[ValidationTypes.Required]: (fieldName: string): string => `${fieldName} is required`,

@@ -1,4 +1,4 @@
-import { ValidationTypes, ValidationMessages, IValidationTypes } from '$lib/constants'
+import { ValidationTypes, ValidationMessages } from '$lib/constants'
 import { ValidationRules } from './rules'
 
 type ArgType = {
@@ -6,6 +6,14 @@ type ArgType = {
 	maxValue?: number
 	email?: boolean
 }
+export type IValidationTypes =
+	| 'required'
+	| 'min-value'
+	| 'max-value'
+	| 'min-length'
+	| 'max-length'
+	| 'email'
+	| 'url'
 
 const prepareValidator = (fieldName: string, validationName: string) => {
 	const args = validationName.split(/:/g)

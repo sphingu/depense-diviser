@@ -33,8 +33,9 @@
 							href={item.path}
 							class:is-active={$page.path === item.path}
 							on:click={toggleMenuVisible}
-						>
-							{item.title}
+							><span>
+								{item.title}
+							</span>
 						</a>
 					{/each}
 				</div>
@@ -67,7 +68,7 @@
 		background-color: rgba(0, 0, 0, 0.1);
 	}
 	.navbar-item.is-active {
-		background-color: black;
+		background-color: black !important;
 		color: white;
 	}
 	.navbar-item.is-active span {

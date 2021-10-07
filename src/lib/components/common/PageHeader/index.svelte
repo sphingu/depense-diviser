@@ -1,5 +1,5 @@
 <script lang="ts">
-	import BackButton from '.,/Buttons/BackButton.svelte'
+	import BackButton from '../Buttons/BackButton.svelte'
 	export let backUrl: string = undefined
 	export let title: string
 </script>
