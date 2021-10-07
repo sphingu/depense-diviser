@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getContext } from 'svelte'
+	import { getContext, onMount } from 'svelte'
 
 	import Input from '../Input/index.svelte'
 	import { fields } from './store'
@@ -8,7 +8,13 @@
 	import type { FieldEventType } from './types'
 
 	export let name: string
+	export let focus = false
+	let ref: HTMLInputElement
 	$: field = $fields[name]
+
+	onMount(() => {
+		focus && ref.focus()
+	})
 
 	const onBlur: FieldEventType = getContext(C.FIELD_BLUR_EVENT)
 	const onChange: FieldEventType = getContext(C.FIELD_CHANGE_EVENT)
@@ -16,6 +22,7 @@
 
 <Input
 	type="text"
+	bind:ref
 	{name}
 	label={field.label}
 	value={field.value}

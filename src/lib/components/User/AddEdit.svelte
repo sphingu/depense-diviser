@@ -15,7 +15,7 @@
 </script>
 
 <Form initialFields={fields} {onSubmit} let:isSubmitting>
-	<FormField name="name" />
+	<FormField name="name" focus={true} />
 	<FormField name="email" />
 
 	<div class="field is-grouped">

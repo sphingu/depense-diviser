@@ -9,6 +9,7 @@
 	export let helpText: string
 	export let label: string
 	export let value: string
+  export let ref: HTMLInputElement;
 
 	$: classes = [(invalid || kind) && `is-${invalid ? 'danger' : kind}`, size && `is-${size}`]
 		.filter(Boolean)
@@ -33,7 +34,7 @@
 <div class="field">
 	<label {...labelProps} for={name}>{label}</label>
 	<div class="control">
-		<input {...inputProps} bind:value on:blur on:input />
+		<input {...inputProps} bind:value on:blur on:input bind:this={ref} />
 	</div>
 	{#if helpText}
 		<p {...helpTextProps} in:fly={{ y: -20, duration: 100 }} out:fade={{ duration: 10 }}>
