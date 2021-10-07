@@ -8,6 +8,8 @@
 		<span class="icon">
 			<slot name="icon" />
 		</span>
+		<slot />
+	{:else}
+		<slot />
 	{/if}
-	<slot />
 </a>

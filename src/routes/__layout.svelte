@@ -1,5 +1,22 @@
-<script lang="ts">
+<script context="module">
+	import { createClient } from '@urql/svelte'
+	export async function load() {
+		const client = createClient({
+			url: API_URL
+		})
+		return {
+			props: { client }
+		}
+	}
+</script>
+
+<script>
+	import { setClient } from '@urql/svelte'
+	import { API_URL } from '$lib/constants'
 	import { Header, Footer } from '$lib/components/common'
+	export let client
+
+	setClient(client)
 </script>
 
 <Header />

@@ -13,6 +13,8 @@ import FormField from './Form/Field.svelte'
 import FormResetButton from './Form/ResetButton.svelte'
 import FormSubmitButton from './Form/SubmitButton.svelte'
 
+import LoadData from './LoadData/index.svelte'
+
 import { toasts as toastStore } from './Toast/store'
 
 export {
@@ -30,6 +32,8 @@ export {
 	FormField,
 	FormResetButton,
 	FormSubmitButton,
+	//other
+	LoadData,
 	// helpers
 	toastStore
 }

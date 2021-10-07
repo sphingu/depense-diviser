@@ -24,3 +24,5 @@ export const ValidationMessages = {
 	[ValidationTypes.MaxLength]: (fieldName: string, maxLength: string | number): string =>
 		`${fieldName} length should not be more than ${maxLength}`
 }
+
+export const API_URL = 'http://localhost:4000'
