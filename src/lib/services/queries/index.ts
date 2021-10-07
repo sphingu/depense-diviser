@@ -24,8 +24,8 @@ export const ADD_USER = gql<IUser>`
 	mutation ($name: String!, $email: String!) {
 		createUser(name: $name, email: $email) {
 			id
-      name
-      email
+			name
+			email
 		}
 	}
 `

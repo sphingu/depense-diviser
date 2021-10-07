@@ -6,13 +6,23 @@
 	export let query: DocumentNode
 	export let variables: Record<string, unknown> = undefined
 	export let value = undefined
+	export let loading = false
 
-	let request = operationStore(query, {
-		variables
-	})
+	let request = operationStore(
+		query,
+		{
+			variables
+		},
+		{ requestPolicy: 'cache-first' }
+	)
 
 	$: value = $request.data
+	$: loading = $request.fetching
 	urqlQuery(request)
+
+	export function reload(): void {
+		$request.reexecute({ requestPolicy: 'network-only' })
+	}
 </script>
 
 {#if $request.fetching}
