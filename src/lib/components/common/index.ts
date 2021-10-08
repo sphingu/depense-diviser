@@ -3,6 +3,8 @@ import Footer from './Footer/index.svelte'
 import Toast from './Toast/index.svelte'
 import Breadcrumb from './Breadcrumb/index.svelte'
 import PageHeader from './PageHeader/index.svelte'
+import Modal from './Modal/index.svelte'
+import ConfirmDeleteModal from './Modal/ConfirmDelete.svelte'
 
 import LinkButton from './Buttons/LinkButton.svelte'
 import BackButton from './Buttons/BackButton.svelte'
@@ -23,6 +25,8 @@ export {
 	Toast,
 	PageHeader,
 	Breadcrumb,
+	Modal,
+	ConfirmDeleteModal,
 	// buttons
 	LinkButton,
 	BackButton,

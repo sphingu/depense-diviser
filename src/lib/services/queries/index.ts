@@ -29,3 +29,12 @@ export const ADD_USER = gql<IUser>`
 		}
 	}
 `
+export const DELETE_USER = gql<IUser>`
+	mutation ($id: Int!) {
+		deleteUser(id: $id) {
+			id
+			name
+			email
+		}
+	}
+`

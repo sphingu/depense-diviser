@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { createEventDispatcher } from 'svelte'
+
 	import type { IUser } from './types'
 
 	export let users: IUser[]
+	const dispatch = createEventDispatcher()
 
-	const confirmDeleteUser = (userId: string) => {
-		if (confirm('Are you sure to delete user: ' + userId)) {
-			alert('deleted')
-		}
+	function deleteUser(user: IUser) {
+		dispatch('delete', user)
 	}
 </script>
 
@@ -28,7 +29,8 @@
 					</div>
 					<footer class="card-footer">
 						<a href={`/users/${user.id}`} class="card-footer-item">Edit</a>
-						<a href="/" class="card-footer-item" on:click={() => confirmDeleteUser(user.id)}
+						<!-- svelte-ignore a11y-invalid-attribute -->
+						<a href="javascript:void(0)" class="card-footer-item" on:click={() => deleteUser(user)}
 							>Delete</a
 						>
 					</footer>

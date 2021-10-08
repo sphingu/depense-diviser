@@ -9,7 +9,7 @@
 	export let helpText: string
 	export let label: string
 	export let value: string
-  export let ref: HTMLInputElement;
+	export let ref: HTMLInputElement
 
 	$: classes = [(invalid || kind) && `is-${invalid ? 'danger' : kind}`, size && `is-${size}`]
 		.filter(Boolean)
