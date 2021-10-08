@@ -3,15 +3,13 @@
 	import { getFormFields } from './helpers'
 
 	import type { IUser } from './types'
-	import type { FieldType } from '$lib/components/common/Form/types'
 
 	export let user: Partial<IUser> = {}
 	export let onSubmit: (value: Record<string, unknown>) => Promise<void>
 
-	let fields: FieldType[] = getFormFields(user)
-
 	$: isAdd = !user.id
 	$: submitText = isAdd ? 'Create' : 'Update'
+	$: fields = getFormFields(user)
 </script>
 
 <Form initialFields={fields} {onSubmit} let:isSubmitting>

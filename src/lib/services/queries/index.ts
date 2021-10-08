@@ -29,6 +29,15 @@ export const ADD_USER = gql<IUser>`
 		}
 	}
 `
+export const EDIT_USER = gql<IUser>`
+	mutation ($id: Int!, $name: String, $email: String) {
+		updateUser(id: $id, name: $name, email: $email) {
+			id
+			name
+			email
+		}
+	}
+`
 export const DELETE_USER = gql<IUser>`
 	mutation ($id: Int!) {
 		deleteUser(id: $id) {

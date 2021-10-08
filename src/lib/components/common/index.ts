@@ -5,6 +5,7 @@ import Breadcrumb from './Breadcrumb/index.svelte'
 import PageHeader from './PageHeader/index.svelte'
 import Modal from './Modal/index.svelte'
 import ConfirmDeleteModal from './Modal/ConfirmDelete.svelte'
+import ProgressBar from './ProgressBar/index.svelte'
 
 import LinkButton from './Buttons/LinkButton.svelte'
 import BackButton from './Buttons/BackButton.svelte'
@@ -27,6 +28,7 @@ export {
 	Breadcrumb,
 	Modal,
 	ConfirmDeleteModal,
+	ProgressBar,
 	// buttons
 	LinkButton,
 	BackButton,

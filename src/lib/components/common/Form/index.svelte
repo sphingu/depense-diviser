@@ -45,7 +45,7 @@
 	}
 	//#endregion
 
-	fields.initialize(initialFields)
+	$: fields.initialize(initialFields)
 
 	setContext(C.FIELD_CHANGE_EVENT, handleChange)
 	setContext(C.FIELD_BLUR_EVENT, handleBlur)

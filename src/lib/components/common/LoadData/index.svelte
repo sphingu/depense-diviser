@@ -2,19 +2,14 @@
 	import { operationStore, query as urqlQuery } from '@urql/svelte'
 
 	import type { DocumentNode } from 'graphql'
+	import { ProgressBar } from '..'
 
 	export let query: DocumentNode
 	export let variables: Record<string, unknown> = undefined
 	export let value = undefined
 	export let loading = false
 
-	let request = operationStore(
-		query,
-		{
-			variables
-		},
-		{ requestPolicy: 'cache-first' }
-	)
+	let request = operationStore(query, variables, { requestPolicy: 'cache-first' })
 
 	$: value = $request.data
 	$: loading = $request.fetching
@@ -26,7 +21,9 @@
 </script>
 
 {#if $request.fetching}
-	<slot name="loading">LOADING...</slot>
+	<slot name="loading">
+		<ProgressBar />
+	</slot>
 {:else if $request.error}
 	<slot name="error">
 		<p style="color: red">{$request.error.message}</p>
