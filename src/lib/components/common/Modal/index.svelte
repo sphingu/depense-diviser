@@ -14,7 +14,7 @@
 			return
 		}
 		show = false
-    dispath('close')
+		dispath('close')
 	}
 </script>
 

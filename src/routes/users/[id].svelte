@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { goto } from '$app/navigation'
 
-  import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
+	import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
 	import { EDIT_USER, GET_USER } from '$lib/services'
 	import { getMutationFn } from '$lib/helpers'
 
@@ -17,8 +16,7 @@
 	$: user = data?.user
 
 	const updateUser = async (values: Partial<IUser>) => {
-		await mutateUser({ ...values, id: userId })
-		goto('/users')
+		return mutateUser({ ...values, id: userId })
 	}
 </script>
 

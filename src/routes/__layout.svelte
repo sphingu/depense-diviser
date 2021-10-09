@@ -13,12 +13,13 @@
 <script lang="ts">
 	import { setClient } from '@urql/svelte'
 	import { API_URL } from '$lib/constants'
-	import { Header, Footer } from '$lib/components/common'
+	import { Header, Footer, Toast } from '$lib/components/common'
 	export let client: Client
 
 	setClient(client)
 </script>
 
+<Toast />
 <Header />
 <div id="main">
 	<section class="section pb-0 pt-0">

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
-
 	import { UserAddEdit, PageHeader } from '$lib/components'
 	import { ADD_USER } from '$lib/services'
 	import { getMutationFn } from '$lib/helpers'
@@ -10,13 +8,7 @@
 	const mutateUser = getMutationFn(ADD_USER)
 
 	const addUser = async (values: Partial<IUser>) => {
-		try {
-			await mutateUser(values)
-			goto('/users')
-		} catch (error) {
-			// TODO: handle error
-			console.log(error)
-		}
+		return mutateUser(values)
 	}
 </script>
 

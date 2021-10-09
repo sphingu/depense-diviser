@@ -5,10 +5,10 @@
 	import { toasts } from './store'
 </script>
 
-<div class="toast-wrapper">
+<section>
 	{#each $toasts as toastInfo}
 		<div
-			class={`toast-item ${toastInfo.type}`}
+			class={`message is-${toastInfo.type}`}
 			in:fly={{
 				delay: 0,
 				duration: 300,
@@ -19,8 +19,33 @@
 			}}
 			out:fade={{ duration: 500 }}
 		>
-			{toastInfo.message}
-			<button on:click={() => toasts.clearToast(toastInfo.id)}>x</button>
+			<div class="message-body is-relative">
+				{toastInfo.message}
+
+				<button
+					class="delete"
+					aria-label="close"
+					on:click={() => toasts.clearToast(toastInfo.id)}
+				/>
+			</div>
 		</div>
 	{/each}
-</div>
+</section>
+
+<style>
+	section {
+		position: absolute;
+		z-index: 10000;
+		display: flex;
+		flex-direction: column;
+		right: 30px;
+		top: 60px;
+		max-height: calc(100vh - 60px);
+		overflow-y: hidden;
+	}
+	.delete {
+		position: absolute;
+		top: 5px;
+		right: 5px;
+	}
+</style>

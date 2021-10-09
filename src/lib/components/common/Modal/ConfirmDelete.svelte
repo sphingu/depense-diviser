@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
-	import { Button, Modal } from '$lib/components/common'
+	import { Button, Modal, toastStore } from '$lib/components/common'
 
-	export let entityTitle: string = ''
-	export let itemText: string = ''
-	export let onDelete: () => Promise<void> | void = () => {}
+	export let entityTitle: string
+	export let itemText: string
+	export let onDelete: () => Promise<unknown>
 	let deleting = false
 
 	const dispatch = createEventDispatcher()
@@ -15,19 +15,26 @@
 	async function deleteItem() {
 		deleting = true
 		try {
-			await onDelete()
-			onClose();
+			const response = await onDelete()
+			if (response['error']) {
+				throw new Error(response['error']['name'])
+			}
+			toastStore.successToast(`${entityTitle} deleted successfylly`)
+			onClose()
 		} catch (error) {
-			alert(error.message)
+			deleting = false
+			toastStore.errorToast(
+				`Error occured while deleting ${entityTitle.toLowerCase()} : ${error.message}`
+			)
 		}
 	}
 	function onClose() {
+		dispatch('close', { deleted: deleting })
 		deleting = false
-		dispatch('close')
 	}
 </script>
 
-<Modal {title} {show} on:close>
+<Modal {title} {show} on:close={onClose}>
 	Are you sure to delete <b>{itemText}</b> ?
 	<div slot="footer">
 		<Button className="is-danger" on:click={deleteItem} loading={deleting}>

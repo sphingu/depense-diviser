@@ -22,12 +22,14 @@
 	function setDeletingUser(e: CustomEvent<IUser>) {
 		userToDelete = e.detail
 	}
-	function clearDeletingUser() {
+	function onConfirmDeleteClose(e: CustomEvent) {
+		if (e.detail?.deleted) {
+			reload()
+		}
 		userToDelete = null
 	}
 	async function deleteUser() {
-		await mutateUser({ id: userToDelete.id })
-		reload()
+		return mutateUser({ id: userToDelete.id })
 	}
 </script>
 
@@ -35,7 +37,7 @@
 	entityTitle="User"
 	itemText={userToDelete?.name}
 	onDelete={deleteUser}
-	on:close={clearDeletingUser}
+	on:close={onConfirmDeleteClose}
 />
 
 <PageHeader backUrl="/" title="Users  " />

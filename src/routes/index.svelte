@@ -1,6 +1,4 @@
 <script context="module" lang="ts">
-	import { BackButton } from '$lib/components/common'
-
 	export const prerender = true
 </script>
 

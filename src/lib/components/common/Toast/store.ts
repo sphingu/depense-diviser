@@ -48,7 +48,7 @@ function createToasts() {
 	const infoToast = (message: string) => addToast(message, 'info')
 	const warningToast = (message: string) => addToast(message, 'warning')
 	const successToast = (message: string) => addToast(message, 'success')
-	const errorToast = (message: string) => addToast(message, 'error')
+	const errorToast = (message: string) => addToast(message, 'danger')
 
 	return {
 		subscribe,

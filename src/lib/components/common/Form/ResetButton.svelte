@@ -6,5 +6,5 @@
 
 <Button type="reset" disabled={isSubmitting}>
 	<i slot="icon" class="ri-restart-line" />
-	<slot>Reset</slot>
+	Reset
 </Button>
