@@ -3,11 +3,14 @@
 	import { isFormModified, isFormValid } from './store'
 
 	export let isSubmitting = false
-
-	$: className = `is-success ${isSubmitting ? 'is-loading' : ''}`
 </script>
 
-<Button type="submit" {className} disabled={!($isFormValid && $isFormModified)}>
+<Button
+	type="submit"
+	className="is-success"
+	loading={isSubmitting}
+	disabled={!($isFormValid && $isFormModified)}
+>
 	<i slot="icon" class="ri-save-3-line" />
-	<slot>Submit</slot>
+	Submit
 </Button>

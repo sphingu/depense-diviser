@@ -3,7 +3,7 @@
 
 	import type { IUser } from './types'
 
-	export let users: IUser[]
+	export let users: IUser[] = []
 	const dispatch = createEventDispatcher()
 
 	function deleteUser(user: IUser) {

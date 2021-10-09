@@ -1,16 +1,20 @@
 <script lang="ts">
 	import { fade, fly } from 'svelte/transition'
 	import { quintOut } from 'svelte/easing'
+	import { createEventDispatcher } from 'svelte'
 
 	export let show = false
 	export let title: string
 	export let ignoreBackground = true
 
-	function toggleShow(isBackgroundClick = false) {
+	const dispath = createEventDispatcher()
+
+	function closeModal(isBackgroundClick = false) {
 		if (isBackgroundClick && !ignoreBackground) {
 			return
 		}
-		show = !show
+		show = false
+    dispath('close')
 	}
 </script>
 
@@ -19,7 +23,7 @@
 		<div
 			class="modal-background"
 			transition:fade={{ duration: 150 }}
-			on:click={() => toggleShow(true)}
+			on:click={() => closeModal(true)}
 		/>
 		<div
 			class="modal-card"
@@ -29,7 +33,7 @@
 			{#if title}
 				<header class="modal-card-head">
 					<p class="modal-card-title">{title}</p>
-					<button class="delete" aria-label="close" on:click={() => toggleShow()} />
+					<button class="delete" aria-label="close" on:click={() => closeModal()} />
 				</header>
 			{/if}
 			<section class="modal-card-body">

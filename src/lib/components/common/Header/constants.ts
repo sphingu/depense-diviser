@@ -13,7 +13,7 @@ export const navigationItems: NavigationItemType[] = [
 	},
 	{
 		path: '/users',
-		title: 'User List',
+		title: 'Users',
 		prefetch: false
 	},
 	{

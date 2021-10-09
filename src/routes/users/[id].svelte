@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { mutation } from '@urql/svelte'
 	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
+
+  import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
 	import { EDIT_USER, GET_USER } from '$lib/services'
-	import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
+	import { getMutationFn } from '$lib/helpers'
 
 	import type { IUser } from '$lib/components/User/types'
 
@@ -11,7 +12,7 @@
 	let data: { user?: IUser } = {}
 	let loading: boolean
 
-	const mutateUser = mutation({ query: EDIT_USER })
+	const mutateUser = getMutationFn(EDIT_USER)
 
 	$: user = data?.user
 

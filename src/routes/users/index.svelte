@@ -8,21 +8,22 @@
 		UserList,
 		ConfirmDeleteModal
 	} from '$lib/components'
+	import { getMutationFn } from '$lib/helpers'
 
 	import type { IUser } from '$lib/components/User/types'
-	import { mutation } from '@urql/svelte'
 
 	let data: { users: IUser[] } = { users: [] }
 	let loading: boolean
 	let reload: () => void
-	let isShowConfirmation = false
 	let userToDelete: IUser
 
-	let mutateUser = mutation({ query: DELETE_USER })
+	let mutateUser = getMutationFn(DELETE_USER)
 
-	function showConfirmation(e: CustomEvent<IUser>) {
+	function setDeletingUser(e: CustomEvent<IUser>) {
 		userToDelete = e.detail
-		isShowConfirmation = true
+	}
+	function clearDeletingUser() {
+		userToDelete = null
 	}
 	async function deleteUser() {
 		await mutateUser({ id: userToDelete.id })
@@ -31,13 +32,13 @@
 </script>
 
 <ConfirmDeleteModal
-	bind:show={isShowConfirmation}
-	entityName="User"
-	itemName={userToDelete?.name}
-	on:delete={deleteUser}
+	entityTitle="User"
+	itemText={userToDelete?.name}
+	onDelete={deleteUser}
+	on:close={clearDeletingUser}
 />
 
-<PageHeader backUrl="/" title="User List" />
+<PageHeader backUrl="/" title="Users  " />
 
 <div class="block is-flex is-justify-content-space-between">
 	<LinkButton path="/users/new">
@@ -53,6 +54,6 @@
 
 <div class="block is-relative is-min-height100">
 	<LoadData bind:reload bind:loading query={ALL_USERS} bind:value={data}>
-		<UserList users={data.users} on:delete={showConfirmation} />
+		<UserList users={data.users} on:delete={setDeletingUser} />
 	</LoadData>
 </div>
