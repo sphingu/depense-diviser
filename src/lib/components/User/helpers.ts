@@ -1,7 +1,7 @@
 import { prepareValidations } from '$lib/helpers'
 
 import type { FieldType } from '$lib/components/common/Form/types'
-import type { IUser } from './types'
+import type { IUser } from '$lib/types/user'
 
 export const getFormFields = (userInfo: Partial<IUser> = {}): FieldType[] => [
 	{

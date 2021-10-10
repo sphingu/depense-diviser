@@ -8,9 +8,9 @@
 		isMenuVisible = !isMenuVisible
 	}
 
-	const onColorChange = (e: Event) => {
-		document.documentElement.style.setProperty('--bgcolor', (e.target as HTMLInputElement).value)
-	}
+	// const onColorChange = (e: Event) => {
+	// 	document.documentElement.style.setProperty('--bgcolor', (e.target as HTMLInputElement).value)
+	// }
 </script>
 
 <section class="section">
@@ -33,7 +33,13 @@
 							href={item.path}
 							class:is-active={$page.path === item.path}
 							on:click={toggleMenuVisible}
-							><span>
+						>
+							{#if item.iconClass}
+								<span class="icon">
+									<i class={item.iconClass} />
+								</span>
+							{/if}
+							<span>
 								{item.title}
 							</span>
 						</a>
@@ -41,11 +47,11 @@
 				</div>
 			</div>
 
-			<div class="navbar-end">
+			<!-- <div class="navbar-end">
 				<div class="navbar-item">
 					<input type="color" id="favcolor" class="inputcolor" on:input={onColorChange} />
 				</div>
-			</div>
+			</div> -->
 		</nav>
 	</div>
 </section>
@@ -71,8 +77,13 @@
 		background-color: black !important;
 		color: white;
 	}
-	.navbar-item.is-active span {
+	.navbar-item.is-active span:last-child {
 		border-bottom: 2px solid;
+	}
+	.navbar-item span.icon {
+		height: auto;
+		margin-right: 5px;
+		font-size: 1.3rem;
 	}
 	.logo {
 		font-size: 2.5em;

@@ -10,7 +10,7 @@
 	} from '$lib/components/common'
 	import { getFormFields } from './helpers'
 
-	import type { IUser } from './types'
+	import type { IUser } from '$lib/types/user'
 
 	export let user: Partial<IUser> = {}
 	export let onSubmit: (value: Record<string, unknown>) => Promise<unknown>

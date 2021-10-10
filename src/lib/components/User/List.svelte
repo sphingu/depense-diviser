@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 
-	import type { IUser } from './types'
+	import type { IUser } from '$lib/types/user'
 
 	export let users: IUser[] = []
 	const dispatch = createEventDispatcher()
@@ -28,11 +28,19 @@
 						</div>
 					</div>
 					<footer class="card-footer">
-						<a href={`/users/${user.id}`} class="card-footer-item">Edit</a>
+						<a href={`/users/${user.id}`} class="card-footer-item">
+							<span class="icon">
+								<i class="ri-edit-fill" />
+							</span>
+							<span>Edit</span>
+						</a>
 						<!-- svelte-ignore a11y-invalid-attribute -->
-						<a href="javascript:void(0)" class="card-footer-item" on:click={() => deleteUser(user)}
-							>Delete</a
-						>
+						<a href="javascript:void(0)" class="card-footer-item" on:click={() => deleteUser(user)}>
+							<span class="icon">
+								<i class="ri-delete-bin-line" />
+							</span>
+							<span>Delete</span>
+						</a>
 					</footer>
 				</div>
 			</div>

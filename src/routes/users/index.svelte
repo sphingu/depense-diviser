@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ALL_USERS, DELETE_USER } from '$lib/services'
+	import { USER_QUERY } from '$lib/services'
 	import {
 		Button,
 		LoadData,
@@ -10,14 +10,14 @@
 	} from '$lib/components'
 	import { getMutationFn } from '$lib/helpers'
 
-	import type { IUser } from '$lib/components/User/types'
+	import type { IUser } from '$lib/types/user'
 
 	let data: { users: IUser[] } = { users: [] }
 	let loading: boolean
 	let reload: () => void
 	let userToDelete: IUser
 
-	let mutateUser = getMutationFn(DELETE_USER)
+	let mutateUser = getMutationFn(USER_QUERY.DELETE)
 
 	function setDeletingUser(e: CustomEvent<IUser>) {
 		userToDelete = e.detail
@@ -40,11 +40,11 @@
 	on:close={onConfirmDeleteClose}
 />
 
-<PageHeader backUrl="/" title="Users" />
+<PageHeader backUrl="/" title="Users" iconClass="ri-contacts-fill" />
 
 <div class="block is-flex is-justify-content-space-between">
 	<LinkButton path="/users/new">
-		<i slot="icon" class="ri-user-add-line ri-xl" />
+		<i slot="icon" class="ri-user-add-fill ri-xl" />
 		<span>Add User</span>
 	</LinkButton>
 
@@ -55,7 +55,7 @@
 </div>
 
 <div class="block is-relative is-min-height100">
-	<LoadData bind:reload bind:loading query={ALL_USERS} bind:value={data}>
+	<LoadData bind:reload bind:loading query={USER_QUERY.GET_ALL} bind:value={data}>
 		<UserList users={data.users} on:delete={setDeletingUser} />
 	</LoadData>
 </div>

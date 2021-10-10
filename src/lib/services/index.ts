@@ -1,2 +1,2 @@
-export * from './queries/index'
+export * from './queries'
 export * from './client'

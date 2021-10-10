@@ -3,6 +3,7 @@
 	import LinkButton from '../Buttons/LinkButton.svelte'
 	export let backUrl = ''
 	export let title = ''
+	export let iconClass = ''
 </script>
 
 <div class="block is-flex">
@@ -14,6 +15,25 @@
 		<BackButton path={backUrl} />
 	{/if}
 	<h1 class="title" class:ml-4={backUrl}>
-		<slot>{title}</slot>
+		<!-- // Note: keep it removed for now -->
+		{#if false && iconClass}
+			<span class="icon">
+				<i class={iconClass} />
+			</span>
+		{/if}
+		<span>
+			<slot>{title}</slot>
+		</span>
 	</h1>
 </div>
+
+<style>
+	h1 {
+		display: flex;
+		align-items: center;
+	}
+	.icon {
+		font-size: 1.5rem;
+		margin-right: 5px;
+	}
+</style>

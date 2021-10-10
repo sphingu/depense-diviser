@@ -2,16 +2,16 @@
 	import { page } from '$app/stores'
 
 	import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
-	import { EDIT_USER, GET_USER } from '$lib/services'
+	import { USER_QUERY } from '$lib/services'
 	import { getMutationFn } from '$lib/helpers'
 
-	import type { IUser } from '$lib/components/User/types'
+	import type { IUser } from '$lib/types/user'
 
 	const userId = Number($page.params.id)
 	let data: { user?: IUser } = {}
 	let loading: boolean
 
-	const mutateUser = getMutationFn(EDIT_USER)
+	const mutateUser = getMutationFn(USER_QUERY.UPDATE)
 
 	$: user = data?.user
 
@@ -20,8 +20,8 @@
 	}
 </script>
 
-<PageHeader backUrl="/users" title="Edit User" />
+<PageHeader backUrl="/users" title="Edit User" iconClass="ri-edit-fill" />
 
-<LoadData bind:loading query={GET_USER} variables={{ id: userId }} bind:value={data}>
+<LoadData bind:loading query={USER_QUERY.GET_SINGLE} variables={{ id: userId }} bind:value={data}>
 	<UserAddEdit bind:user onSubmit={updateUser} />
 </LoadData>
