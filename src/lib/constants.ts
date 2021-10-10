@@ -26,3 +26,7 @@ export const ValidationMessages = {
 }
 
 export const API_URL = 'http://localhost:4000'
+
+export const ERRORS = {
+	API_ERROR: 'An error has been occurred, please try after sometime.'
+}

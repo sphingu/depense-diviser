@@ -1,7 +1,9 @@
+import { toasts } from '$lib/components/common/Toast/store'
 import { mutation } from '@urql/svelte'
 import type { DocumentNode } from 'graphql'
 
 export * from './validations'
+import * as C from '$lib/constants'
 
 export const isEmpty = (obj: unknown): boolean => {
 	return (
@@ -26,6 +28,16 @@ export function getMutationFn(
 ): (variables?: Record<string, unknown>) => Promise<unknown> {
 	const mutate = mutation({ query })
 	return async (variables?: Record<string, unknown>) => {
-		return mutate(variables)
+		try {
+			const response = await mutate(variables)
+			if (response['error']) {
+				throw new Error(response['error']['message'])
+			}
+			return response
+		} catch (error) {
+			console.log('Error', error)
+			toasts.errorToast(C.ERRORS.API_ERROR)
+			throw new Error(C.ERRORS.API_ERROR)
+		}
 	}
 }

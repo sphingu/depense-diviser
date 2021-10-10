@@ -15,17 +15,11 @@
 	async function deleteItem() {
 		deleting = true
 		try {
-			const response = await onDelete()
-			if (response['error']) {
-				throw new Error(response['error']['name'])
-			}
+			await onDelete()
 			toastStore.successToast(`${entityTitle} deleted successfylly`)
 			onClose()
 		} catch (error) {
 			deleting = false
-			toastStore.errorToast(
-				`Error occured while deleting ${entityTitle.toLowerCase()} : ${error.message}`
-			)
 		}
 	}
 	function onClose() {

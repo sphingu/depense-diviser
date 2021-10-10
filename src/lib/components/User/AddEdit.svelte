@@ -20,18 +20,9 @@
 	$: fields = getFormFields(user)
 
 	async function submitHandler(value: Record<string, unknown>) {
-		try {
-			const response = await onSubmit(value)
-			if (response['error']) {
-				throw new Error(response['error']['name'])
-			}
-			toastStore.successToast(`User ${isAdd ? 'created' : 'updated'} successfully`)
-			goto('/users')
-		} catch (error) {
-			toastStore.errorToast(
-				`Error occured while ${isAdd ? 'creating' : 'updating'} user : ${error.message}`
-			)
-		}
+		await onSubmit(value)
+		toastStore.successToast(`User ${isAdd ? 'created' : 'updated'} successfully`)
+		goto('/users')
 	}
 </script>
 

@@ -40,16 +40,16 @@
 	on:close={onConfirmDeleteClose}
 />
 
-<PageHeader backUrl="/" title="Users  " />
+<PageHeader backUrl="/" title="Users" />
 
 <div class="block is-flex is-justify-content-space-between">
 	<LinkButton path="/users/new">
-		<i slot="icon" class="ri-add-circle-line ri-xl" />
+		<i slot="icon" class="ri-user-add-line ri-xl" />
 		<span>Add User</span>
 	</LinkButton>
 
 	<Button {loading} on:click={reload}>
-		<i slot="icon" class="ri-add-circle-line ri-xl" />
+		<i slot="icon" class="ri-refresh-line ri-xl" />
 		Reload
 	</Button>
 </div>

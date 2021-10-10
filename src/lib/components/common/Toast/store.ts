@@ -17,15 +17,13 @@ function createToasts() {
 
 	const clearToast = (id: string) =>
 		update((messages) =>
-			messages.reduce((acc, message) => {
+			messages.filter((message) => {
 				if (message.id === id) {
 					clearTimeout(message.timerId)
-				} else {
-					acc = [...acc, message]
+					return false
 				}
-
-				return acc
-			}, [] as ToastMessageType[])
+				return true
+			})
 		)
 	const addToast = (message: string, type: ToastType) => {
 		toastCount++
@@ -45,19 +43,14 @@ function createToasts() {
 		])
 	}
 
-	const infoToast = (message: string) => addToast(message, 'info')
-	const warningToast = (message: string) => addToast(message, 'warning')
-	const successToast = (message: string) => addToast(message, 'success')
-	const errorToast = (message: string) => addToast(message, 'danger')
-
 	return {
 		subscribe,
-		infoToast,
-		warningToast,
-		successToast,
-		errorToast,
 		clearToast,
-		clearAllToast
+		clearAllToast,
+		infoToast: (message: string) => addToast(message, 'info'),
+		warningToast: (message: string) => addToast(message, 'warning'),
+		successToast: (message: string) => addToast(message, 'success'),
+		errorToast: (message: string) => addToast(message, 'danger')
 	}
 }
 
