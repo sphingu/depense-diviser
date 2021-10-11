@@ -45,3 +45,6 @@ body {
 .is-min-height100 {
 	min-height: 100px !important;
 }
+.tags.has-addons .tag:not(:first-child) {
+	border-left: 1px solid;
+}

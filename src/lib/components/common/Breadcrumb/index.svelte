@@ -11,7 +11,7 @@
 	</div>
 </section>
 
-<style lang="scss">
+<style>
 	section {
 		background: rgba(0, 0, 0, 0.05);
 	}

@@ -1,7 +1,7 @@
 export type FieldType = {
 	id: string
 	label: string
-	value?: string
+	value?: string | string[]
 	validations?: string[]
 }
 
@@ -10,7 +10,7 @@ export type FieldInfo = Omit<FieldType, 'id'> & {
 	dirty: boolean
 	touched: boolean
 	error: string
-	validate: (value?: string) => string
+	validate: (value?: string | string[]) => string
 }
 
 export type FieldEventType = (e: Event) => void

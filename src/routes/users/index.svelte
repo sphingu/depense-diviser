@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { mutation } from '@urql/svelte'
 	import { USER_QUERY } from '$lib/services'
 	import {
 		Button,
@@ -8,7 +9,6 @@
 		UserList,
 		ConfirmDeleteModal
 	} from '$lib/components'
-	import { getMutationFn } from '$lib/helpers'
 
 	import type { IUser } from '$lib/types/user'
 
@@ -17,7 +17,7 @@
 	let reload: () => void
 	let userToDelete: IUser
 
-	let mutateUser = getMutationFn(USER_QUERY.DELETE)
+	let deleteUserMutation = mutation({ query: USER_QUERY.DELETE })
 
 	function setDeletingUser(e: CustomEvent<IUser>) {
 		userToDelete = e.detail
@@ -29,7 +29,7 @@
 		userToDelete = null
 	}
 	async function deleteUser() {
-		return mutateUser({ id: userToDelete.id })
+		return deleteUserMutation({ id: userToDelete.id })
 	}
 </script>
 

@@ -5,6 +5,9 @@ import type { DocumentNode } from 'graphql'
 export * from './validations'
 import * as C from '$lib/constants'
 
+export const getString = (val: number): string =>
+	val === null || val === undefined ? '' : val.toString()
+
 export const isEmpty = (obj: unknown): boolean => {
 	return (
 		obj && // 👈 null and undefined check

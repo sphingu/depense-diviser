@@ -43,8 +43,8 @@ export function getValidator(fieldName: string, validations?: string[]): (value:
 
 export const prepareValidations = (
 	required: boolean,
-	minLength: number,
-	maxLength: number,
+	minLength?: number,
+	maxLength?: number,
 	{ minValue, maxValue, email }: ArgType = {}
 ): string[] => {
 	const validations: string[] = []

@@ -2,13 +2,13 @@ import type { NavigationItemType } from './types'
 
 export const navigationItems: NavigationItemType[] = [
 	{
-    iconClass: 'ri-home-2-fill',
+		iconClass: 'ri-home-2-fill',
 		path: '/',
 		title: 'Home',
 		prefetch: true
 	},
 	{
-    iconClass: 'ri-numbers-fill',
+		iconClass: 'ri-numbers-fill',
 		path: '/month-wise',
 		title: 'Monthly Report',
 		prefetch: true
