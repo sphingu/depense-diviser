@@ -8,7 +8,7 @@
 <section>
 	{#each $toasts as toastInfo}
 		<div
-			class={`message is-${toastInfo.type}`}
+			class={`notification is-${toastInfo.type}`}
 			in:fly={{
 				delay: 0,
 				duration: 300,
@@ -19,15 +19,8 @@
 			}}
 			out:fade={{ duration: 500 }}
 		>
-			<div class="message-body is-relative">
-				{toastInfo.message}
-
-				<button
-					class="delete"
-					aria-label="close"
-					on:click={() => toasts.clearToast(toastInfo.id)}
-				/>
-			</div>
+			<button class="delete" aria-label="close" on:click={() => toasts.clearToast(toastInfo.id)} />
+			{toastInfo.message}
 		</div>
 	{/each}
 </section>
@@ -42,10 +35,5 @@
 		top: 60px;
 		max-height: calc(100vh - 60px);
 		overflow-y: hidden;
-	}
-	.delete {
-		position: absolute;
-		top: 5px;
-		right: 5px;
 	}
 </style>

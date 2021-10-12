@@ -25,7 +25,7 @@ export const ValidationMessages = {
 		`${fieldName} length should not be more than ${maxLength}`
 }
 
-export const API_URL = 'http://192.168.1.2:4000'
+export const API_URL = 'http://192.168.1.2:5001'
 
 export const ERRORS = {
 	API_ERROR: 'An error has been occurred, please try after sometime.'

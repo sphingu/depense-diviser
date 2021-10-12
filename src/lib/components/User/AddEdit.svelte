@@ -28,7 +28,7 @@
 
 <Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
 	<FormField name="name" focus={true} />
-	<FormField name="email" />
+	<FormField name="email" type="email" />
 
 	<div class="field is-grouped">
 		<p class="control">

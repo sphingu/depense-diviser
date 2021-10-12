@@ -20,7 +20,7 @@
 						<i class="ri-exchange-dollar-fill ri-2x" />
 						<div class="dd-header-content">
 							<div class="title is-4">{transaction.name}</div>
-							<span class="tag is-success is-light">
+							<span class="tag is-link is-light is-medium has-text-weight-bold">
 								₹ {transaction.amount.toFixed(2)}
 							</span>
 						</div>
@@ -30,7 +30,7 @@
 							<span class="icon">
 								<i class="ri-coins-fill" />
 							</span>
-							<span class="tag is-success is-light">
+							<span class="tag is-success is-light is-medium">
 								{transaction.payer.name}
 							</span>
 						</div>
@@ -40,7 +40,7 @@
 							</span>
 							<div class="tags has-addons">
 								{#each transaction.ownedUsers as user}
-									<span class="tag is-info is-light">{user.name}</span>
+									<span class="tag is-info is-light is-medium">{user.name}</span>
 								{/each}
 							</div>
 						</div>

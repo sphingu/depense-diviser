@@ -50,7 +50,7 @@ function createFields() {
 			error: field.validate(field.value)
 		}))
 
-	const setValue = (fieldName: string, value: string) =>
+	const setValue = (fieldName: string, value: string | string[]) =>
 		_updateField(fieldName, (field) => ({
 			...field,
 			touched: true,

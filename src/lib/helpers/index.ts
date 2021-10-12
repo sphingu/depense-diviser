@@ -5,7 +5,13 @@ import type { DocumentNode } from 'graphql'
 export * from './validations'
 import * as C from '$lib/constants'
 
-export const getString = (val: number): string =>
+export const getDateInputString = (date?: string): string => {
+	if (!date) {
+		date = new Date().toJSON()
+	}
+	return date.split('T')[0]
+}
+export const getString = (val: number | string): string =>
 	val === null || val === undefined ? '' : val.toString()
 
 export const isEmpty = (obj: unknown): boolean => {

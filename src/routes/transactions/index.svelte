@@ -12,7 +12,7 @@
 
 	import type { ITransaction } from '$lib/types/transaction'
 
-	let data: { transactions: ITransaction[] } = { transactions: [] }
+	let data: { transactions?: ITransaction[] }
 	let loading: boolean
 	let reload: () => void
 	let transactionToDelete: ITransaction

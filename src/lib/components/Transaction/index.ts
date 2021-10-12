@@ -1,3 +1,4 @@
 import TransactionList from './List.svelte'
+import TransactionAdd from './Add.svelte'
 
-export { TransactionList }
+export { TransactionList, TransactionAdd }

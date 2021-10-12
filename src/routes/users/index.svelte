@@ -12,7 +12,7 @@
 
 	import type { IUser } from '$lib/types/user'
 
-	let data: { users: IUser[] } = { users: [] }
+	let data: { users: IUser[] }
 	let loading: boolean
 	let reload: () => void
 	let userToDelete: IUser

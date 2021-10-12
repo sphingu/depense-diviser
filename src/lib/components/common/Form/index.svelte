@@ -47,8 +47,9 @@
 
 	$: fields.initialize(initialFields)
 
-	setContext(C.FIELD_CHANGE_EVENT, handleChange)
+	setContext(C.FIELD_SET_VALUE, fields.setValue)
 	setContext(C.FIELD_BLUR_EVENT, handleBlur)
+	setContext(C.FIELD_CHANGE_EVENT, handleChange)
 </script>
 
 <form on:submit|preventDefault={handleSubmit} on:reset|preventDefault={handleReset}>

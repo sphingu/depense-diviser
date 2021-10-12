@@ -1,4 +1,4 @@
-import { getString, prepareValidations } from '$lib/helpers'
+import { getDateInputString, getString, prepareValidations } from '$lib/helpers'
 
 import type { FieldType } from '$lib/components/common/Form/types'
 import type { ITransactionValues } from '$lib/types/transaction'
@@ -14,19 +14,19 @@ export const getFormFields = (userInfo: Partial<ITransactionValues> = {}): Field
 		id: 'amount',
 		label: 'Amount',
 		validations: prepareValidations(true, 1, 12, { minValue: 1, maxValue: 500000 }),
-		value: getString(userInfo.amount) || ''
+		value: getString(userInfo.amount)
 	},
 	{
 		id: 'date',
 		label: 'Date',
 		validations: prepareValidations(true, 5, 50),
-		value: userInfo.date || new Date().toJSON()
+		value: getDateInputString(userInfo.date)
 	},
 	{
 		id: 'payerId',
 		label: 'Payer',
 		validations: prepareValidations(true),
-		value: getString(userInfo.payerId) || ''
+		value: getString(userInfo.payerId)
 	},
 	{
 		id: 'ownedUserIds',

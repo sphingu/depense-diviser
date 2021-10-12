@@ -8,7 +8,7 @@
 	import type { IUser, IUserSingleQuery, IUserValues } from '$lib/types/user'
 
 	const variables: IUserSingleQuery = { id: Number($page.params.id) }
-	let data: { user?: IUser } = {}
+	let data: { user?: IUser }
 	let loading: boolean
 
 	const updateUserMutation = mutation({ query: USER_QUERY.UPDATE })

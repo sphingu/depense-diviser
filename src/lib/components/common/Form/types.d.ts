@@ -14,3 +14,4 @@ export type FieldInfo = Omit<FieldType, 'id'> & {
 }
 
 export type FieldEventType = (e: Event) => void
+export type SetValueType = (name: string, value: string | string[]) => void
