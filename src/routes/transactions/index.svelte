@@ -6,7 +6,8 @@
 		PageHeader,
 		LinkButton,
 		TransactionList,
-		ConfirmDeleteModal
+		ConfirmDeleteModal,
+		ExpandButton
 	} from '$lib/components'
 	import { getMutationFn } from '$lib/helpers'
 
@@ -14,13 +15,14 @@
 
 	let data: { transactions?: ITransaction[] }
 	let loading: boolean
+	let expanded = true
 	let reload: () => void
 	let transactionToDelete: ITransaction
 
 	let mutateTransaction = getMutationFn(TRANSACTION_QUERY.DELETE)
 
-	function setDeletingTransaction(e: CustomEvent<ITransaction>) {
-		transactionToDelete = e.detail
+	function setDeletingTransaction(e: CustomEvent<{ transaction: ITransaction }>) {
+		transactionToDelete = e.detail.transaction
 	}
 	function onConfirmDeleteClose(e: CustomEvent) {
 		if (e.detail?.deleted) {
@@ -47,15 +49,20 @@
 		<i slot="icon" class="ri-exchange-line ri-xl" />
 		<span>Add Transaction</span>
 	</LinkButton>
-
-	<Button {loading} on:click={reload}>
-		<i slot="icon" class="ri-refresh-line ri-xl" />
-		Reload
-	</Button>
+	<div>
+		<ExpandButton bind:expanded />
+		<Button {loading} on:click={reload}>
+			<i slot="icon" class="ri-refresh-line ri-xl" />
+		</Button>
+	</div>
 </div>
 
 <div class="block is-relative is-min-height100">
 	<LoadData bind:reload bind:loading query={TRANSACTION_QUERY.GET_ALL} bind:value={data}>
-		<TransactionList transactions={data?.transactions} on:delete={setDeletingTransaction} />
+		<TransactionList
+			bind:expanded
+			transactions={data?.transactions}
+			on:delete={setDeletingTransaction}
+		/>
 	</LoadData>
 </div>

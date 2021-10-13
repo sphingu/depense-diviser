@@ -10,6 +10,7 @@ import ProgressBar from './ProgressBar/index.svelte'
 import LinkButton from './Buttons/LinkButton.svelte'
 import BackButton from './Buttons/BackButton.svelte'
 import Button from './Buttons/Button.svelte'
+import ExpandButton from './Buttons/ExpandButton.svelte'
 
 import Form from './Form/index.svelte'
 import FormField from './Form/Field.svelte'
@@ -33,6 +34,7 @@ export {
 	LinkButton,
 	BackButton,
 	Button,
+	ExpandButton,
 	// form
 	Form,
 	FormField,
