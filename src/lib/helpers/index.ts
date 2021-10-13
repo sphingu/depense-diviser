@@ -50,3 +50,13 @@ export function getMutationFn(
 		}
 	}
 }
+
+export const hasAPIError = (response: unknown): boolean => {
+	if (!response['error']) {
+		return false
+	}
+
+	console.log('API Error', response['error']['message'])
+	toasts.errorToast(C.ERRORS.API_ERROR)
+	return true
+}

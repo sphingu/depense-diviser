@@ -56,6 +56,6 @@
 
 <div class="block is-relative is-min-height100">
 	<LoadData bind:reload bind:loading query={TRANSACTION_QUERY.GET_ALL} bind:value={data}>
-		<TransactionList transactions={data.transactions} on:delete={setDeletingTransaction} />
+		<TransactionList transactions={data?.transactions} on:delete={setDeletingTransaction} />
 	</LoadData>
 </div>

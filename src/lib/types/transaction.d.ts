@@ -15,4 +15,3 @@ export type ITransaction = ITransactionSingleQuery &
 		month: number
 		year: number
 	}
-export type ITransactionValues = Partial<ITransactionCreateQuery>

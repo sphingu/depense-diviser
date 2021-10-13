@@ -56,6 +56,6 @@
 
 <div class="block is-relative is-min-height100">
 	<LoadData bind:reload bind:loading query={USER_QUERY.GET_ALL} bind:value={data}>
-		<UserList users={data.users} on:delete={setDeletingUser} />
+		<UserList users={data?.users} on:delete={setDeletingUser} />
 	</LoadData>
 </div>

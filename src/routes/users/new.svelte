@@ -7,8 +7,8 @@
 
 	const createUserMutation = mutation({ query: USER_QUERY.CREATE })
 
-	const addUser = async (values: IUser) => {
-		return createUserMutation(values)
+	const addUser = async (values: Record<keyof IUser, unknown>) => {
+		return createUserMutation(values as IUser)
 	}
 </script>
 

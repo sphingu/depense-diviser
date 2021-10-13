@@ -13,7 +13,7 @@
 	// }
 </script>
 
-<section class="section">
+<section>
 	<div class="container">
 		<nav class="navbar">
 			<div class="navbar-brand">

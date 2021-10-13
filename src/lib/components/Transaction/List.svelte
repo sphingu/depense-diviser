@@ -14,40 +14,38 @@
 {#if transactions.length}
 	<div class="columns is-multiline is-centered">
 		{#each transactions as transaction}
-			<div class="column is-one-third-widescreen is-half-desktop is-half-tablet">
+			<div class="column is-half is-one-third-widescreen">
 				<div class="card">
 					<div class="card-header">
 						<i class="ri-exchange-dollar-fill ri-2x" />
 						<div class="dd-header-content">
-							<div class="title is-4">{transaction.name}</div>
+							<div class="has-text-weight-bold">{transaction.name}</div>
 							<span class="tag is-link is-light is-medium has-text-weight-bold">
 								₹ {transaction.amount.toFixed(2)}
 							</span>
 						</div>
 					</div>
 					<div class="card-content">
-						<div class="has-text-success-dark">
-							<span class="icon">
-								<i class="ri-coins-fill" />
-							</span>
+						<span class="icon has-text-success-dark">
+							<i class="ri-coins-fill" />
+						</span>
+						<div>
 							<span class="tag is-success is-light is-medium">
 								{transaction.payer.name}
 							</span>
 						</div>
-						<div class="has-text-info-dark">
-							<span class="icon">
-								<i class="ri-hand-coin-fill" />
-							</span>
-							<div class="tags has-addons">
-								{#each transaction.ownedUsers as user}
-									<span class="tag is-info is-light is-medium">{user.name}</span>
-								{/each}
-							</div>
+						<span class="icon has-text-info-dark">
+							<i class="ri-hand-coin-fill" />
+						</span>
+						<div class="tags">
+							{#each transaction.ownedUsers as user}
+								<div class="tag mb-0 is-info is-light is-medium">{user.name}</div>
+							{/each}
 						</div>
-						<div class="has-text-grey">
-							<span class="icon">
-								<i class="ri-time-fill" />
-							</span>
+						<span class="icon has-text-grey">
+							<i class="ri-time-fill" />
+						</span>
+						<div>
 							<span class="tag is-light">
 								{new Date(transaction.date).toLocaleDateString(undefined, {
 									// day: '2-digit',
@@ -87,27 +85,29 @@
 <style lang="scss">
 	.card-header {
 		i {
-			padding: 0 1rem;
+			padding: 0 0.5rem;
 		}
 		.dd-header-content {
 			display: flex;
+			// flex-direction: column;
 			align-items: center;
 			flex-grow: 1;
-			padding-right: 1rem;
+			padding-right: 0.5rem;
 			> * {
 				margin: 0;
 			}
-			.title {
+			div {
 				flex-grow: 1;
 			}
 		}
 	}
 	.card-content {
-		padding: 0.5rem 1rem 0.25rem;
+		padding: 0.5rem 0.5rem 0.25rem;
+		display: grid;
+		grid-template-columns: 32px auto;
 		> * {
-			display: flex;
-			align-items: center;
 			margin-bottom: 0.25rem;
+			align-items: center;
 		}
 	}
 </style>

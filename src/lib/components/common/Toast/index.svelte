@@ -13,7 +13,7 @@
 				delay: 0,
 				duration: 300,
 				x: 0,
-				y: 50,
+				y: -100,
 				opacity: 0.1,
 				easing: backOut
 			}}

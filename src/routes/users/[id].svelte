@@ -5,7 +5,7 @@
 	import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
 	import { USER_QUERY } from '$lib/services'
 
-	import type { IUser, IUserSingleQuery, IUserValues } from '$lib/types/user'
+	import type { IUser, IUserCreateQuery, IUserSingleQuery, IUserUpdateQuery } from '$lib/types/user'
 
 	const variables: IUserSingleQuery = { id: Number($page.params.id) }
 	let data: { user?: IUser }
@@ -13,15 +13,13 @@
 
 	const updateUserMutation = mutation({ query: USER_QUERY.UPDATE })
 
-	$: user = data?.user
-
-	const updateUser = async (values: IUserValues) => {
-		return updateUserMutation({ ...values, id: variables.id })
+	const updateUser = async (values: Record<keyof IUserCreateQuery, unknown>) => {
+		return updateUserMutation({ ...values, id: variables.id } as IUserUpdateQuery)
 	}
 </script>
 
 <PageHeader backUrl="/users" title="Edit User" iconClass="ri-edit-fill" />
 
 <LoadData bind:loading query={USER_QUERY.GET_SINGLE} {variables} bind:value={data}>
-	<UserAddEdit bind:user onSubmit={updateUser} />
+	<UserAddEdit user={data?.user} onSubmit={updateUser} />
 </LoadData>

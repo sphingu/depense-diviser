@@ -9,6 +9,7 @@
 		toastStore
 	} from '$lib/components/common'
 	import { getFormFields } from './helpers'
+	import { hasAPIError } from '$lib/helpers'
 
 	import type { IUser } from '$lib/types/user'
 
@@ -20,7 +21,11 @@
 	$: fields = getFormFields(user)
 
 	async function submitHandler(value: Record<string, unknown>) {
-		await onSubmit(value)
+		const response = await onSubmit(value)
+		if (hasAPIError(response)) {
+			return
+		}
+
 		toastStore.successToast(`User ${isAdd ? 'created' : 'updated'} successfully`)
 		goto('/users')
 	}

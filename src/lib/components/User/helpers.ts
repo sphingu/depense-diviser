@@ -1,9 +1,9 @@
 import { prepareValidations } from '$lib/helpers'
 
 import type { FieldType } from '$lib/components/common/Form/types'
-import type { IUserValues } from '$lib/types/user'
+import type { IUserCreateQuery } from '$lib/types/user'
 
-export const getFormFields = (userInfo: Partial<IUserValues> = {}): FieldType[] => [
+export const getFormFields = (userInfo: Partial<IUserCreateQuery> = {}): FieldType[] => [
 	{
 		id: 'name',
 		label: 'Name',

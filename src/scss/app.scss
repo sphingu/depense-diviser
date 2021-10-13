@@ -34,6 +34,9 @@ body {
 	margin: 1em 0;
 	box-shadow: 0 10px 15px 0 rgb(90 116 148 / 40%);
 	background-color: rgba(255, 255, 255, 0.2);
+	@media screen and (max-width: 1024px) {
+		border-radius: 0;
+	}
 }
 
 .ser-v-center {
@@ -44,7 +47,4 @@ body {
 
 .is-min-height100 {
 	min-height: 100px !important;
-}
-.tags.has-addons .tag:not(:first-child) {
-	border-left: 1px solid;
 }

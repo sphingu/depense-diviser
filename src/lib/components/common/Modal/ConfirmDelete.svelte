@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { Button, Modal, toastStore } from '$lib/components/common'
+	import { hasAPIError } from '$lib/helpers'
 
 	export let entityTitle: string
 	export let itemText: string
@@ -15,7 +16,10 @@
 	async function deleteItem() {
 		deleting = true
 		try {
-			await onDelete()
+			const response = await onDelete()
+			if (hasAPIError(response)) {
+				throw new Error('Not Deleted')
+			}
 			toastStore.successToast(`${entityTitle} deleted successfylly`)
 			onClose()
 		} catch (error) {

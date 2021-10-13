@@ -79,7 +79,8 @@
 </div>
 
 <style>
-	.select, select {
+	.select,
+	select {
 		width: 100%;
 	}
 </style>

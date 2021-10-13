@@ -1,5 +1,5 @@
 <!-- // TODO: make breadcrumb dynamic and refactor style -->
-<section class="section pb-0 pt-0">
+<section class="pb-0 pt-0">
 	<div class="container">
 		<nav class="breadcrumb" aria-label="breadcrumbs">
 			<ul>

@@ -1,9 +1,9 @@
 import { getDateInputString, getString, prepareValidations } from '$lib/helpers'
 
 import type { FieldType } from '$lib/components/common/Form/types'
-import type { ITransactionValues } from '$lib/types/transaction'
+import type { ITransactionCreateQuery } from '$lib/types/transaction'
 
-export const getFormFields = (userInfo: Partial<ITransactionValues> = {}): FieldType[] => [
+export const getFormFields = (userInfo: Partial<ITransactionCreateQuery> = {}): FieldType[] => [
 	{
 		id: 'name',
 		label: 'Name',

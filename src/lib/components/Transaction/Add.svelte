@@ -11,11 +11,11 @@
 	} from '$lib/components/common'
 	import { getFormFields } from './helpers'
 	import { USER_QUERY } from '$lib/services'
+	import { getString, hasAPIError } from '$lib/helpers'
 
 	import type { ITransaction } from '$lib/types/transaction'
 	import type { IUser } from '$lib/types/user'
 	import type { OptionType } from '$lib/types'
-	import { getString } from '$lib/helpers'
 
 	let data: { users: IUser[] }
 	export let transaction: Partial<ITransaction> = {}
@@ -26,7 +26,9 @@
 	$: fields = getFormFields(transaction)
 
 	async function submitHandler(value: Record<string, unknown>) {
-		await onSubmit(value)
+		if (hasAPIError(await onSubmit(value))) {
+			return
+		}
 		toastStore.successToast(`Transaction ${isAdd ? 'created' : 'updated'} successfully`)
 		goto('/transactions')
 	}

@@ -22,7 +22,7 @@
 <Toast />
 <Header />
 <div id="main">
-	<section class="section pb-0 pt-0">
+	<section>
 		<div class="container">
 			<div class="box">
 				<slot />
