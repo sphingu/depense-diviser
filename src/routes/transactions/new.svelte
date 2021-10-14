@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { mutation } from '@urql/svelte'
 
-	import { TransactionAdd, PageHeader } from '$lib/components'
+	import { PageHeader, TransactionAddEdit } from '$lib/components'
 	import { getTransactionRequest } from './_helpers'
 	import { TRANSACTION_QUERY } from '$lib/services'
 	import type { ITransactionCreateQuery } from '$lib/types/transaction'
@@ -15,4 +15,4 @@
 
 <PageHeader backUrl="/transactions" iconClass="ri-exchange-fill" title="Add Transaction" />
 
-<TransactionAdd onSubmit={createTransaction} />
+<TransactionAddEdit onSubmit={createTransaction} />

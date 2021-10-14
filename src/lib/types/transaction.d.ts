@@ -9,7 +9,7 @@ export type ITransactionCreateQuery = {
 
 export type ITransactionUpdateQuery = ITransactionSingleQuery & Partial<ITransactionCreateQuery>
 export type ITransaction = ITransactionSingleQuery &
-	Omit<ITransactionCreateQuery, 'payerId' | 'ownedUserIds'> & {
+	ITransactionCreateQuery & {
 		payer: IUser
 		ownedUsers: IUsers[]
 		month: number

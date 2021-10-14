@@ -12,5 +12,5 @@
 	disabled={!($isFormValid && $isFormModified)}
 >
 	<i slot="icon" class="ri-save-3-line" />
-	Submit
+	<slot>Submit</slot>
 </Button>

@@ -33,26 +33,29 @@
 		goto('/transactions')
 	}
 
-	$: list = data?.users.map(
-		(user) => ({ text: user.name, value: getString(user.id) } as OptionType)
-	)
+	$: list =
+		data?.users.map((user) => ({ text: user.name, value: getString(user.id) } as OptionType)) || []
 </script>
 
 <LoadData query={USER_QUERY.GET_ALL} bind:value={data}>
-	<Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
-		<FormField name="name" focus={true} />
-		<FormField name="amount" type="number" />
-		<FormField name="date" type="date" />
-		<FormField name="payerId" type="dropdown" {list} />
-		<FormField name="ownedUserIds" type="dropdown" multiple={true} {list} />
+	{#if list.length}
+		<Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
+			<FormField name="name" focus={true} />
+			<FormField name="amount" type="number" />
+			<FormField name="date" type="date" />
+			<FormField name="payerId" type="dropdown" {list} />
+			<FormField name="ownedUserIds" type="dropdown" multiple={true} {list} />
 
-		<div class="field is-grouped">
-			<p class="control">
-				<FormSubmitButton {isSubmitting}>{submitText}</FormSubmitButton>
-			</p>
-			<p class="control">
-				<FormResetButton {isSubmitting} />
-			</p>
-		</div>
-	</Form>
+			<div class="field is-grouped">
+				<p class="control">
+					<FormSubmitButton {isSubmitting}>{submitText}</FormSubmitButton>
+				</p>
+				<p class="control">
+					<FormResetButton {isSubmitting} />
+				</p>
+			</div>
+		</Form>
+	{:else}
+		Please Add User First
+	{/if}
 </LoadData>

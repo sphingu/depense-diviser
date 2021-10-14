@@ -58,7 +58,6 @@
 						{/each}
 					</select>
 				{:else}
-					{value}
 					<select {...inputProps} {value} on:blur on:change bind:this={ref}>
 						<option value="">Select {label}</option>
 						{#each list as item}

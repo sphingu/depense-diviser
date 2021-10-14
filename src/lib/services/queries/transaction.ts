@@ -16,6 +16,7 @@ export const GET_ALL: TypedDocumentNode<ITransaction[], undefined> = gql`
 			year
 			month
 			date
+			payerId
 			payer {
 				id
 				name
@@ -38,6 +39,7 @@ export const GET_SINGLE: TypedDocumentNode<ITransaction, ITransactionSingleQuery
 			year
 			month
 			date
+			payerId
 			payer {
 				id
 				name
