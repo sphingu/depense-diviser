@@ -2,7 +2,7 @@
 @import '../../node_modules/bulma/bulma.sass';
 @import '../../node_modules/remixicon/fonts/remixicon.css';
 
-@import 'normalize.css';
+// @import 'normalize.css';
 
 :root {
 	// --bgcolor: #61e8af57;
@@ -20,7 +20,6 @@ body {
 	// background-size: 400% 400%;
 	// background-size: contain;
 }
-
 #root {
 	display: flex;
 	flex-direction: column;
@@ -39,7 +38,7 @@ body {
 	}
 }
 
-.ser-v-center {
+.sp-v-center {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -47,4 +46,9 @@ body {
 
 .is-min-height100 {
 	min-height: 100px !important;
+}
+
+.sp-space-between {
+	display: flex;
+	justify-content: space-between;
 }

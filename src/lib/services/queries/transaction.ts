@@ -1,11 +1,13 @@
 import { gql } from '@urql/svelte'
+
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type {
+	IMonthlyTransaction,
 	ITransaction,
 	ITransactionCreateQuery,
 	ITransactionSingleQuery,
 	ITransactionUpdateQuery
 } from '$lib/types/transaction'
-import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 
 export const GET_ALL: TypedDocumentNode<ITransaction[], undefined> = gql`
 	query {
@@ -97,6 +99,17 @@ export const DELETE: TypedDocumentNode<ITransaction, ITransactionSingleQuery> = 
 	mutation ($id: Int!) {
 		deleteTransaction(id: $id) {
 			id
+		}
+	}
+`
+
+export const GET_MONTHLY: TypedDocumentNode<IMonthlyTransaction[], undefined> = gql`
+	query {
+		monthlyTransactions {
+			month
+			year
+			count
+			sum
 		}
 	}
 `

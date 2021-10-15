@@ -3,8 +3,9 @@
 	import { mutation } from '@urql/svelte'
 
 	import { PageHeader, LoadData, TransactionAddEdit } from '$lib/components'
+	import { getTransactionRequest, formatTransactionResponse } from './_helpers'
 	import { TRANSACTION_QUERY } from '$lib/services'
-  import { getTransactionRequest } from './_helpers'
+	import { isEmpty } from '$lib/helpers'
 
 	import type {
 		ITransaction,
@@ -26,17 +27,16 @@
 			id: variables.id
 		} as ITransactionUpdateQuery)
 	}
-	function formatTransaction(transaction: ITransaction): ITransaction {
-		return { ...transaction, ownedUserIds: transaction.ownedUsers.map((user) => user.id) }
-	}
 </script>
 
 <PageHeader backUrl="/transactions" iconClass="ri-exchange-fill" title="Edit Transaction" />
 
-<LoadData bind:loading query={TRANSACTION_QUERY.GET_SINGLE} {variables} bind:value={data}>
-	{#if data?.transaction}
+<LoadData bind:loading query={TRANSACTION_QUERY.GET_SINGLE} {variables} bind:data>
+	{#if isEmpty(data.transaction)}
+		Not able to retrieve transaction information
+	{:else}
 		<TransactionAddEdit
-			transaction={formatTransaction(data.transaction)}
+			transaction={formatTransactionResponse(data.transaction)}
 			onSubmit={updateTransaction}
 		/>
 	{/if}

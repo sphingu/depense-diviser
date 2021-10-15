@@ -6,6 +6,8 @@ import PageHeader from './PageHeader/index.svelte'
 import Modal from './Modal/index.svelte'
 import ConfirmDeleteModal from './Modal/ConfirmDelete.svelte'
 import ProgressBar from './ProgressBar/index.svelte'
+import NoRecord from './NoRecord/index.svelte'
+import Card from './Card/index.svelte'
 
 import LinkButton from './Buttons/LinkButton.svelte'
 import BackButton from './Buttons/BackButton.svelte'
@@ -30,6 +32,8 @@ export {
 	Modal,
 	ConfirmDeleteModal,
 	ProgressBar,
+	NoRecord,
+	Card,
 	// buttons
 	LinkButton,
 	BackButton,

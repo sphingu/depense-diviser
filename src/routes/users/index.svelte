@@ -7,7 +7,8 @@
 		PageHeader,
 		LinkButton,
 		UserList,
-		ConfirmDeleteModal
+		ConfirmDeleteModal,
+		NoRecord
 	} from '$lib/components'
 
 	import type { IUser } from '$lib/types/user'
@@ -16,7 +17,6 @@
 	let loading: boolean
 	let reload: () => void
 	let userToDelete: IUser
-
 	let deleteUserMutation = mutation({ query: USER_QUERY.DELETE })
 
 	function setDeletingUser(e: CustomEvent<IUser>) {
@@ -42,20 +42,29 @@
 
 <PageHeader backUrl="/" title="Users" iconClass="ri-contacts-fill" />
 
-<div class="block is-flex is-justify-content-space-between">
-	<LinkButton path="/users/new">
-		<i slot="icon" class="ri-user-add-fill ri-xl" />
-		<span>Add User</span>
-	</LinkButton>
+{#if Boolean(data?.users?.length)}
+	<div class="block sp-space-between">
+		<LinkButton path="/users/new">
+			<i slot="icon" class="ri-user-add-fill ri-xl" />
+			Add User
+		</LinkButton>
 
-	<Button {loading} on:click={reload}>
-		<i slot="icon" class="ri-refresh-line ri-xl" />
-		Reload
-	</Button>
-</div>
+		<Button {loading} on:click={reload}>
+			<i slot="icon" class="ri-refresh-line ri-xl" />
+			Reload
+		</Button>
+	</div>
+{/if}
 
-<div class="block is-relative is-min-height100">
-	<LoadData bind:reload bind:loading query={USER_QUERY.GET_ALL} bind:value={data}>
-		<UserList users={data?.users} on:delete={setDeletingUser} />
-	</LoadData>
-</div>
+<LoadData bind:reload bind:loading query={USER_QUERY.GET_ALL} bind:data>
+	{#if Boolean(data?.users?.length)}
+		<UserList users={data.users} on:delete={setDeletingUser} />
+	{:else}
+		<NoRecord text="No users has been added yet.">
+			<LinkButton path="/users/new" className="is-fullwidth">
+				<i slot="icon" class="ri-user-add-fill ri-xl" />
+				Add User
+			</LinkButton>
+		</NoRecord>
+	{/if}
+</LoadData>

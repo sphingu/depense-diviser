@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
-
+	import { Card } from '$lib/components'
 	import type { IUser } from '$lib/types/user'
 
 	export let users: IUser[] = []
@@ -11,41 +11,39 @@
 	}
 </script>
 
-{#if users.length}
-	<div class="columns is-multiline is-centered">
-		{#each users as user}
-			<div class="column is-one-third-widescreen is-half-desktop is-half-tablet">
-				<div class="card">
-					<div class="card-content">
-						<div class="media">
-							<div class="media-left">
-								<i class="ri-user-line ri-2x" />
-							</div>
-							<div class="media-content">
-								<p class="title is-4">{user.name}</p>
-								<p class="subtitle is-6">{user.email}</p>
-							</div>
-						</div>
+<div class="columns is-multiline is-centered">
+	{#each users as user}
+		<div class="column is-half is-one-third-widescreen">
+			<Card>
+				<svelte:fragment slot="header">
+					<i class="ri-user-fill ri-2x" />
+					<div class="card-header-content">
+						<div class="has-text-weight-bold">{user.name}</div>
 					</div>
-					<footer class="card-footer">
-						<a href={`/users/${user.id}`} class="card-footer-item">
-							<span class="icon">
-								<i class="ri-edit-fill" />
-							</span>
-							<span>Edit</span>
-						</a>
-						<!-- svelte-ignore a11y-invalid-attribute -->
-						<a href="javascript:void(0)" class="card-footer-item" on:click={() => deleteUser(user)}>
-							<span class="icon">
-								<i class="ri-delete-bin-line" />
-							</span>
-							<span>Delete</span>
-						</a>
-					</footer>
+				</svelte:fragment>
+				<svelte:fragment slot="footer">
+					<a href={`/users/${user.id}`} class="card-footer-item">
+						<span class="icon">
+							<i class="ri-edit-fill" />
+						</span>
+						<span>Edit</span>
+					</a>
+					<!-- svelte-ignore a11y-invalid-attribute -->
+					<a href="javascript:void(0)" class="card-footer-item" on:click={() => deleteUser(user)}>
+						<span class="icon">
+							<i class="ri-delete-bin-line" />
+						</span>
+						<span>Delete</span>
+					</a>
+				</svelte:fragment>
+
+				<span class="icon has-text-info-dark">
+					<i class="ri-mail-fill" />
+				</span>
+				<div>
+					<span class="tag is-info is-light is-medium">{user.email}</span>
 				</div>
-			</div>
-		{/each}
-	</div>
-{:else}
-	No users found
-{/if}
+			</Card>
+		</div>
+	{/each}
+</div>

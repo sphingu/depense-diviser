@@ -2,9 +2,11 @@
 	export let text = ''
 </script>
 
-<div class="progress-wrapper">
-	{text}
-	<div id="progressBar" class="progress-bar--container visible" />
+<div class="is-relative is-min-height100">
+	<div class="progress-wrapper">
+		{text}
+		<div id="progressBar" class="progress-bar--container visible" />
+	</div>
 </div>
 
 <style>

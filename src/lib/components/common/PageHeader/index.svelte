@@ -6,6 +6,8 @@
 	export let iconClass = ''
 </script>
 
+<svelte:head><title>{title} | D-Diviser</title></svelte:head>
+
 <div class="block is-flex">
 	{#if backUrl === '/'}
 		<LinkButton path={backUrl}>

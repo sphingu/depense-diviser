@@ -7,8 +7,10 @@
 		FormSubmitButton,
 		FormResetButton,
 		LoadData,
+		NoRecord,
+		LinkButton,
 		toastStore
-	} from '$lib/components/common'
+	} from '$lib/components'
 	import { getFormFields } from './helpers'
 	import { USER_QUERY } from '$lib/services'
 	import { getString, hasAPIError } from '$lib/helpers'
@@ -37,7 +39,7 @@
 		data?.users.map((user) => ({ text: user.name, value: getString(user.id) } as OptionType)) || []
 </script>
 
-<LoadData query={USER_QUERY.GET_ALL} bind:value={data}>
+<LoadData query={USER_QUERY.GET_ALL} bind:data>
 	{#if list.length}
 		<Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
 			<FormField name="name" focus={true} />
@@ -56,6 +58,11 @@
 			</div>
 		</Form>
 	{:else}
-		Please Add User First
+		<NoRecord text="No users has been added yet.">
+			<LinkButton path="/users/new" className="is-fullwidth">
+				<i slot="icon" class="ri-user-add-fill ri-xl" />
+				Add User
+			</LinkButton>
+		</NoRecord>
 	{/if}
 </LoadData>

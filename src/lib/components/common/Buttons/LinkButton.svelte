@@ -8,7 +8,11 @@
 		<span class="icon">
 			<slot name="icon" />
 		</span>
-		<slot />
+		{#if $$slots.default}
+			<span>
+				<slot />
+			</span>
+		{/if}
 	{:else}
 		<slot />
 	{/if}

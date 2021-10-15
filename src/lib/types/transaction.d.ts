@@ -15,3 +15,11 @@ export type ITransaction = ITransactionSingleQuery &
 		month: number
 		year: number
 	}
+
+export type IMonthlyTransaction = {
+	month: number
+	year: number
+	count: number
+	sum: number
+	title?: string // client side
+}

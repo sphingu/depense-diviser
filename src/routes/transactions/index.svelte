@@ -7,7 +7,8 @@
 		LinkButton,
 		TransactionList,
 		ConfirmDeleteModal,
-		ExpandButton
+		ExpandButton,
+		NoRecord
 	} from '$lib/components'
 	import { getMutationFn } from '$lib/helpers'
 
@@ -18,7 +19,6 @@
 	let expanded = true
 	let reload: () => void
 	let transactionToDelete: ITransaction
-
 	let mutateTransaction = getMutationFn(TRANSACTION_QUERY.DELETE)
 
 	function setDeletingTransaction(e: CustomEvent<{ transaction: ITransaction }>) {
@@ -43,26 +43,34 @@
 />
 
 <PageHeader backUrl="/" title="Transactions" iconClass="ri-exchange-fill" />
-
-<div class="block is-flex is-justify-content-space-between">
-	<LinkButton path="/transactions/new">
-		<i slot="icon" class="ri-exchange-line ri-xl" />
-		<span>Add Transaction</span>
-	</LinkButton>
-	<div>
-		<ExpandButton bind:expanded />
-		<Button {loading} on:click={reload}>
-			<i slot="icon" class="ri-refresh-line ri-xl" />
-		</Button>
+{#if Boolean(data?.transactions?.length)}
+	<div class="block sp-space-between">
+		<LinkButton path="/transactions/new">
+			<i slot="icon" class="ri-exchange-line ri-xl" />
+			Add Transaction
+		</LinkButton>
+		<div>
+			<ExpandButton bind:expanded />
+			<Button {loading} on:click={reload}>
+				<i slot="icon" class="ri-refresh-line ri-xl" />
+			</Button>
+		</div>
 	</div>
-</div>
+{/if}
 
-<div class="block is-relative is-min-height100">
-	<LoadData bind:reload bind:loading query={TRANSACTION_QUERY.GET_ALL} bind:value={data}>
+<LoadData bind:reload bind:loading query={TRANSACTION_QUERY.GET_ALL} bind:data>
+	{#if Boolean(data?.transactions?.length)}
 		<TransactionList
 			bind:expanded
 			transactions={data?.transactions}
 			on:delete={setDeletingTransaction}
 		/>
-	</LoadData>
-</div>
+	{:else}
+		<NoRecord text="No transactions has been made yet.">
+			<LinkButton path="/transactions/new" className="is-fullwidth">
+				<i slot="icon" class="ri-exchange-line ri-xl" />
+				Add Transaction
+			</LinkButton>
+		</NoRecord>
+	{/if}
+</LoadData>

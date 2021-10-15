@@ -6,12 +6,8 @@
 	export let expanded: boolean
 </script>
 
-{#if transactions.length}
-	<div class="columns is-multiline is-centered">
-		{#each transactions as transaction}
-			<TransactionListItem {transaction} {expanded} on:delete />
-		{/each}
-	</div>
-{:else}
-	No transaction found
-{/if}
+<div class="columns is-multiline is-centered">
+	{#each transactions as transaction}
+		<TransactionListItem {transaction} {expanded} on:delete />
+	{/each}
+</div>

@@ -4,6 +4,7 @@
 
 	import { UserAddEdit, PageHeader, LoadData } from '$lib/components'
 	import { USER_QUERY } from '$lib/services'
+	import { isEmpty } from '$lib/helpers'
 
 	import type { IUser, IUserCreateQuery, IUserSingleQuery, IUserUpdateQuery } from '$lib/types/user'
 
@@ -20,6 +21,10 @@
 
 <PageHeader backUrl="/users" title="Edit User" iconClass="ri-edit-fill" />
 
-<LoadData bind:loading query={USER_QUERY.GET_SINGLE} {variables} bind:value={data}>
-	<UserAddEdit user={data?.user} onSubmit={updateUser} />
+<LoadData bind:loading query={USER_QUERY.GET_SINGLE} {variables} bind:data>
+	{#if isEmpty(data.user)}
+		Not able to retrieve user information
+	{:else}
+		<UserAddEdit user={data?.user} onSubmit={updateUser} />
+	{/if}
 </LoadData>
