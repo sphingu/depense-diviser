@@ -36,7 +36,7 @@
 	}
 
 	$: list =
-		data?.users.map((user) => ({ text: user.name, value: getString(user.id) } as OptionType)) || []
+		data?.users.map((user) => ({ text: user.email, value: getString(user.id) } as OptionType)) || []
 </script>
 
 <LoadData query={USER_QUERY.GET_ALL} bind:data>

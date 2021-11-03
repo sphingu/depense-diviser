@@ -1,8 +1,8 @@
 import { createClient } from '@urql/svelte'
-import { API_URL } from '$lib/constants'
+import { URLS } from '$lib/constants'
 
 const client = createClient({
-	url: API_URL
+	url: URLS.API
 })
 
 export default client

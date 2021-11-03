@@ -2,7 +2,7 @@
 	import { Client, createClient } from '@urql/svelte'
 	export async function load(): Promise<{ props: { client: Client } }> {
 		const client = createClient({
-			url: API_URL
+			url: URLS.API
 		})
 		return {
 			props: { client }
@@ -12,8 +12,8 @@
 
 <script lang="ts">
 	import { setClient } from '@urql/svelte'
-	import { API_URL } from '$lib/constants'
 	import { Header, Footer, Toast } from '$lib/components/common'
+	import { URLS } from '$lib/constants'
 	export let client: Client
 
 	setClient(client)

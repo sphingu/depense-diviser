@@ -14,7 +14,7 @@
 		ITransactionUpdateQuery
 	} from '$lib/types/transaction'
 
-	const variables: ITransactionSingleQuery = { id: Number($page.params.id) }
+	const variables: ITransactionSingleQuery = { id: $page.params.id }
 	let data: { transaction?: ITransaction }
 	let loading: boolean
 

@@ -24,8 +24,12 @@ export const ValidationMessages = {
 	[ValidationTypes.MaxLength]: (fieldName: string, maxLength: string | number): string =>
 		`${fieldName} length should not be more than ${maxLength}`
 }
-
-export const API_URL = 'http://192.168.1.2:5001'
+const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL as string
+export const URLS = {
+	API: `/graphql`,
+	GOOGLE_LOGIN: `${SERVER_BASE_URL}/auth/google`,
+	GOOGLE_LOGOUT: `${SERVER_BASE_URL}/logout`
+}
 
 export const ERRORS = {
 	API_ERROR: 'An error has been occurred, please try after sometime.'

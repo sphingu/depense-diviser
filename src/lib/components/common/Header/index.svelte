@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { navigationItems } from './constants'
+	import { LinkButton, isAuthenticated } from '$lib/components'
+	import { URLS } from '$lib/constants'
 
 	let isMenuVisible = false
 
@@ -18,40 +20,44 @@
 		<nav class="navbar">
 			<div class="navbar-brand">
 				<div class="navbar-item p-0 logo">D-diviser</div>
-				<div class="navbar-burger" on:click={toggleMenuVisible}>
-					<span />
-					<span />
-					<span />
-				</div>
+				{#if $isAuthenticated}
+					<div class="navbar-burger" on:click={toggleMenuVisible}>
+						<span />
+						<span />
+						<span />
+					</div>
+				{/if}
 			</div>
-
-			<div class="navbar-menu" class:is-active={isMenuVisible}>
-				<div class="navbar-start">
-					{#each navigationItems as item}
-						<a
-							class="navbar-item"
-							href={item.path}
-							class:is-active={$page.path === item.path}
-							on:click={toggleMenuVisible}
-						>
-							{#if item.iconClass}
-								<span class="icon">
-									<i class={item.iconClass} />
+			{#if $isAuthenticated}
+				<div class="navbar-menu" class:is-active={isMenuVisible}>
+					<div class="navbar-start">
+						{#each navigationItems as item}
+							<a
+								class="navbar-item"
+								href={item.path}
+								class:is-active={$page.path === item.path}
+								on:click={toggleMenuVisible}
+							>
+								{#if item.iconClass}
+									<span class="icon">
+										<i class={item.iconClass} />
+									</span>
+								{/if}
+								<span>
+									{item.title}
 								</span>
-							{/if}
-							<span>
-								{item.title}
-							</span>
-						</a>
-					{/each}
+							</a>
+						{/each}
+					</div>
 				</div>
-			</div>
 
-			<!-- <div class="navbar-end">
-				<div class="navbar-item">
-					<input type="color" id="favcolor" class="inputcolor" on:input={onColorChange} />
+				<div class="navbar-end">
+					<div class="navbar-item">
+						<LinkButton path={URLS.GOOGLE_LOGOUT}>Logout</LinkButton>
+						<!-- <input type="color" id="favcolor" class="inputcolor" on:input={onColorChange} /> -->
+					</div>
 				</div>
-			</div> -->
+			{/if}
 		</nav>
 	</div>
 </section>

@@ -8,7 +8,7 @@
 
 	import type { IUser, IUserCreateQuery, IUserSingleQuery, IUserUpdateQuery } from '$lib/types/user'
 
-	const variables: IUserSingleQuery = { id: Number($page.params.id) }
+	const variables: IUserSingleQuery = { id: $page.params.id }
 	let data: { user?: IUser }
 	let loading: boolean
 

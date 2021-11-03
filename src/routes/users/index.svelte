@@ -35,7 +35,7 @@
 
 <ConfirmDeleteModal
 	entityTitle="User"
-	itemText={userToDelete?.name}
+	itemText={userToDelete?.email}
 	onDelete={deleteUser}
 	on:close={onConfirmDeleteClose}
 />

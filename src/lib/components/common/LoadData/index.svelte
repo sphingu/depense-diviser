@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { operationStore, query as urqlQuery } from '@urql/svelte'
-
 	import type { DocumentNode } from 'graphql'
-	import { ProgressBar } from '..'
+
+	import { ProgressBar, LinkButton } from '$lib/components'
 
 	export let query: DocumentNode
 	export let variables: Record<string, unknown> = undefined
@@ -13,6 +13,7 @@
 
 	$: data = $request.data
 	$: loading = $request.fetching
+	$: isUnauthorized = $request.error?.graphQLErrors[0].extensions.code === 'UNAUTHORIZED'
 	urqlQuery(request)
 
 	export function reload(): void {
@@ -25,9 +26,16 @@
 		<ProgressBar />
 	</slot>
 {:else if $request.error}
-	<slot name="error">
-		<p style="color: red">{$request.error.message}</p>
-	</slot>
+	{#if !isUnauthorized}
+		<slot name="error">
+			<p style="color: red">{$request.error.message}</p>
+		</slot>
+	{:else}
+		<slot name="unauthorize"
+			>You are logged out from app. Please login again
+			<LinkButton path="/">Login</LinkButton>
+		</slot>
+	{/if}
 {:else}
 	<!-- Not followed this way as Not able to set slot props type
   https://github.com/sveltejs/rfcs/pull/38

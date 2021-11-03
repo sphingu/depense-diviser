@@ -21,19 +21,21 @@ export const GET_ALL: TypedDocumentNode<ITransaction[], undefined> = gql`
 			payerId
 			payer {
 				id
-				name
+				firstName
+				lastName
 				email
 			}
 			ownedUsers {
 				id
-				name
+				firstName
+				lastName
 				email
 			}
 		}
 	}
 `
 export const GET_SINGLE: TypedDocumentNode<ITransaction, ITransactionSingleQuery> = gql`
-	query ($id: Int!) {
+	query ($id: String!) {
 		transaction(id: $id) {
 			id
 			name
@@ -44,12 +46,14 @@ export const GET_SINGLE: TypedDocumentNode<ITransaction, ITransactionSingleQuery
 			payerId
 			payer {
 				id
-				name
+				firstName
+				lastName
 				email
 			}
 			ownedUsers {
 				id
-				name
+				firstName
+				lastName
 				email
 			}
 		}
@@ -59,8 +63,8 @@ export const CREATE: TypedDocumentNode<ITransaction, ITransactionCreateQuery> = 
 	mutation (
 		$name: String!
 		$amount: Int!
-		$payerId: Int!
-		$ownedUserIds: [Int!]!
+		$payerId: String!
+		$ownedUserIds: [String!]!
 		$date: DateTime!
 	) {
 		createTransaction(
@@ -76,11 +80,11 @@ export const CREATE: TypedDocumentNode<ITransaction, ITransactionCreateQuery> = 
 `
 export const UPDATE: TypedDocumentNode<ITransaction, ITransactionUpdateQuery> = gql`
 	mutation (
-		$id: Int!
+		$id: String!
 		$name: String
 		$amount: Int
-		$payerId: Int
-		$ownedUserIds: [Int!]
+		$payerId: String
+		$ownedUserIds: [String!]
 		$date: DateTime
 	) {
 		updateTransaction(
@@ -96,7 +100,7 @@ export const UPDATE: TypedDocumentNode<ITransaction, ITransactionUpdateQuery> = 
 	}
 `
 export const DELETE: TypedDocumentNode<ITransaction, ITransactionSingleQuery> = gql`
-	mutation ($id: Int!) {
+	mutation ($id: String!) {
 		deleteTransaction(id: $id) {
 			id
 		}

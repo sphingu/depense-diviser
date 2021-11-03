@@ -18,7 +18,7 @@
 				<svelte:fragment slot="header">
 					<i class="ri-user-fill ri-2x" />
 					<div class="card-header-content">
-						<div class="has-text-weight-bold">{user.name}</div>
+						<div class="has-text-weight-bold">{user.firstName} {user.lastName}</div>
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="footer">

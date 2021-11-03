@@ -6,8 +6,8 @@ export function getTransactionRequest(
 	return {
 		name: values.name as string,
 		amount: Number(values.amount),
-		payerId: Number(values.payerId),
-		ownedUserIds: (values.ownedUserIds as string[]).map(Number),
+		payerId: values.payerId as string,
+		ownedUserIds: values.ownedUserIds as string[],
 		date: new Date(values.date as string).toJSON()
 	}
 }

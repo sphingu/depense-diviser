@@ -1,9 +1,9 @@
-export type ITransactionSingleQuery = { id: number }
+export type ITransactionSingleQuery = { id: string }
 export type ITransactionCreateQuery = {
 	name: string
 	amount: number
-	payerId: number
-	ownedUserIds: number[]
+	payerId: string
+	ownedUserIds: string[]
 	date: string
 }
 
