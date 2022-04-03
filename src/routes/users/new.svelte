@@ -2,7 +2,7 @@
 	import { mutation } from '@urql/svelte'
 	import { UserAddEdit, PageHeader } from '$lib/components'
 	import { USER_QUERY } from '$lib/services'
-	import type { User, UserCreateInput } from '$lib/@generated/type-graphql'
+	import type { UserCreateInput } from '$lib/@generated/type-graphql'
 
 	const createUserMutation = mutation({ query: USER_QUERY.CREATE })
 

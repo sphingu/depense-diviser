@@ -9,12 +9,12 @@
 	import type { OptionType } from '$lib/types'
 
 	export let name: string
-	export let type: 'text' | 'email' | 'number' | 'date' | 'dropdown' = 'text'
+	export let type: 'text' | 'email' | 'number' | 'date' | 'dropdown' | 'boolean' = 'text'
 	export let focus = false
 	export let list: OptionType[] = []
 	export let multiple = false
 	let ref: HTMLInputElement
-	let value = $fields[name]?.value || (multiple ? [] : '')
+	let value = $fields[name]?.value || (type === 'boolean' ? false : multiple ? [] : '')
 	$: field = $fields[name]
 
 	onMount(() => {

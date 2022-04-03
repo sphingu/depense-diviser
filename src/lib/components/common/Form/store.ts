@@ -31,7 +31,7 @@ function createFields() {
 					[id]: {
 						id,
 						label,
-						value: value || '',
+						value: value === false ? false : value || '',
 						initialValue: value,
 						touched: false,
 						dirty: false,
@@ -50,7 +50,7 @@ function createFields() {
 			error: field.validate(field.value)
 		}))
 
-	const setValue = (fieldName: string, value: string | string[]) =>
+	const setValue = (fieldName: string, value: string | string[] | boolean) =>
 		_updateField(fieldName, (field) => ({
 			...field,
 			touched: true,

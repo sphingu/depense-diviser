@@ -10,7 +10,7 @@
 	export let invalid = false
 	export let helpText: string
 	export let label: string
-	export let value: string | string[]
+	export let value: any //string | string[] | boolean	// TODO: issue of type here for checkbox
 	export let ref: HTMLInputElement | HTMLSelectElement
 	export let list: OptionType[]
 	export let multiple = false
@@ -36,9 +36,16 @@
 </script>
 
 <div class="field">
-	<label {...labelProps} for={name}>{label}</label>
+	{#if type !== 'boolean'}
+		<label {...labelProps} for={name}>{label}</label>
+	{/if}
 	<div class="control">
-		{#if type === 'dropdown'}
+		{#if type === 'boolean'}
+			<label class="label checkbox">
+				<input id={name} {name} type="checkbox" on:change bind:checked={value} />
+				{label}
+			</label>
+		{:else if type === 'dropdown'}
 			<div class="select" class:is-multiple={multiple}>
 				{#if multiple}
 					<!-- {...inputProps} spreding input props will not work here ref: https://github.com/sveltejs/svelte/issues/5644 -->
@@ -81,5 +88,8 @@
 	.select,
 	select {
 		width: 100%;
+	}
+	.checkbox {
+		margin: 1rem 0;
 	}
 </style>

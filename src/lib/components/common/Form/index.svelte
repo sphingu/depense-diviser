@@ -39,7 +39,7 @@
 	const handleChange = (e: Event) => {
 		const element = e.target as HTMLInputElement
 		const name = element.name
-		const value = element.value
+		const value = element.type === 'checkbox' ? element.checked : element.value
 
 		fields.setValue(name, value)
 	}

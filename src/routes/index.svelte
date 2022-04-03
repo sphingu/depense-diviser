@@ -1,35 +1,20 @@
 <script lang="ts">
-	import {
-		LoadData,
-		PageHeader,
-		GoogleLoginButton,
-		isAuthenticated,
-		profileInfo
-	} from '$lib/components'
-	import { URLS } from '$lib/constants'
+	import { LoadData, PageHeader, isAuthenticated, profileInfo } from '$lib/components'
 	import { USER_QUERY } from '$lib/services'
+	import Login from './login.svelte'
 	import type { User } from '$lib/@generated/type-graphql'
 
-	let loading = false
-	let data: { currentUser?: User } | undefined
+	let profileData: { currentUser?: User } | undefined
 	let isSetProflie = !$isAuthenticated
-	$: if (isSetProflie && data?.currentUser?.id) {
-		profileInfo.setProfile(data.currentUser)
-	}
 
-	function googleLogin() {
-		window.location.href = URLS.GOOGLE_LOGIN
+	$: if (isSetProflie && profileData?.currentUser?.id) {
+		profileInfo.setProfile(profileData.currentUser)
 	}
 </script>
 
-<LoadData bind:loading query={USER_QUERY.GET_CURRENT_USER} bind:data>
+<LoadData query={USER_QUERY.GET_CURRENT_USER} bind:data={profileData}>
 	<div slot="unauthorize">
-		<PageHeader title="Please login" />
-		<div class="block sp-v-center">
-			<GoogleLoginButton on:click={googleLogin} />
-		</div>
+		<Login />
 	</div>
-	<PageHeader>
-		{`Welcome ${$profileInfo?.firstName} ${$profileInfo?.lastName}`}
-	</PageHeader>
+	<PageHeader title="Home" />
 </LoadData>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { Card } from '$lib/components'
-	import type { Transaction } from '$lib/@generated/type-graphql';
+	import type { Transaction } from '$lib/@generated/type-graphql'
 
 	const dispatch = createEventDispatcher()
 	export let transaction: Transaction

@@ -1,4 +1,4 @@
-export const APP_COPYRIGHT = '© D-diviser App 2021.'
+export const APP_COPYRIGHT = '© D-diviser App 2022.'
 export const MADE_WITH = ' Made with '
 export const HEART = '♥'
 export const BY = ' by '

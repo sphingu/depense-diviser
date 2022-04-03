@@ -19,6 +19,8 @@
 	setClient(client)
 </script>
 
+<svelte:head><title>D-Diviser</title></svelte:head>
+
 <Toast />
 <Header />
 <div id="main">

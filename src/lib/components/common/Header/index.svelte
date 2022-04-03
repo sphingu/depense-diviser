@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { navigationItems } from './constants'
-	import { LinkButton, isAuthenticated } from '$lib/components'
-	import { URLS } from '$lib/constants'
+	import { isAuthenticated, profileInfo } from '$lib/components'
 
 	let isMenuVisible = false
+	let isProfileMenuVisible = false
 
 	const toggleMenuVisible = () => {
 		isMenuVisible = !isMenuVisible
+	}
+	const toggleProfileMenuVisibility = () => {
+		isProfileMenuVisible = !isProfileMenuVisible
 	}
 
 	// const onColorChange = (e: Event) => {
@@ -50,11 +53,19 @@
 						{/each}
 					</div>
 				</div>
-
 				<div class="navbar-end">
-					<div class="navbar-item">
-						<LinkButton path={URLS.GOOGLE_LOGOUT}>Logout</LinkButton>
-						<!-- <input type="color" id="favcolor" class="inputcolor" on:input={onColorChange} /> -->
+					<!-- <div class="navbar-item">
+						<input type="color" on:change={onColorChange} />
+					</div> -->
+					<div class="navbar-item has-dropdown" class:is-active={isProfileMenuVisible}>
+						<!-- svelte-ignore a11y-invalid-attribute -->
+						<a class="navbar-link" on:click={toggleProfileMenuVisibility} href="javascript:void(0)">
+							<img src={$profileInfo.imageUrl} alt="profile" />
+						</a>
+						<div class="navbar-dropdown is-right">
+							<a class="navbar-item" href="/proflie">Profile</a>
+							<a class="navbar-item" href="/logout">Logout</a>
+						</div>
 					</div>
 				</div>
 			{/if}
@@ -62,7 +73,7 @@
 	</div>
 </section>
 
-<style>
+<style lang="scss">
 	section {
 		padding-bottom: 0;
 		padding-top: 0;
@@ -76,20 +87,23 @@
 	.navbar-burger {
 		height: auto;
 	}
-	.navbar-item:hover {
+	/* .navbar-item:hover {
 		background-color: rgba(0, 0, 0, 0.1);
-	}
-	.navbar-item.is-active {
-		background-color: black !important;
-		color: white;
-	}
-	.navbar-item.is-active span:last-child {
-		border-bottom: 2px solid;
-	}
-	.navbar-item span.icon {
-		height: auto;
-		margin-right: 5px;
-		font-size: 1.3rem;
+	} */
+	.navbar-start {
+		.navbar-item.is-active {
+			background-color: black !important;
+			color: white;
+		}
+		.navbar-item.is-active span:last-child {
+			border-bottom: 2px solid;
+		}
+
+		.navbar-item span.icon {
+			height: auto;
+			margin-right: 5px;
+			font-size: 1.3rem;
+		}
 	}
 	.logo {
 		font-size: 2.5em;
@@ -114,4 +128,12 @@
 			background-position: 0% 50%;
 		}
 	}
+	/* patch for profile dropdown issue start */
+	.navbar-dropdown {
+		display: none;
+	}
+	.has-dropdown.is-active .navbar-dropdown {
+		display: block;
+	}
+	/* patch for profile dropdown issue end */
 </style>
