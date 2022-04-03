@@ -11,15 +11,15 @@
 		NoRecord
 	} from '$lib/components'
 
-	import type { IUser } from '$lib/types/user'
+	import type { User } from '$lib/@generated/type-graphql'
 
-	let data: { users: IUser[] }
+	let data: { users: User[] }
 	let loading: boolean
 	let reload: () => void
-	let userToDelete: IUser
+	let userToDelete: User
 	let deleteUserMutation = mutation({ query: USER_QUERY.DELETE })
 
-	function setDeletingUser(e: CustomEvent<IUser>) {
+	function setDeletingUser(e: CustomEvent<User>) {
 		userToDelete = e.detail
 	}
 	function onConfirmDeleteClose(e: CustomEvent) {
@@ -29,7 +29,7 @@
 		userToDelete = null
 	}
 	async function deleteUser() {
-		return deleteUserMutation({ id: userToDelete.id })
+		return deleteUserMutation({ where: { id: userToDelete.id } })
 	}
 </script>
 

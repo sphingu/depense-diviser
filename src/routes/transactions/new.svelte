@@ -2,14 +2,13 @@
 	import { mutation } from '@urql/svelte'
 
 	import { PageHeader, TransactionAddEdit } from '$lib/components'
-	import { getTransactionRequest } from './_helpers'
 	import { TRANSACTION_QUERY } from '$lib/services'
-	import type { ITransactionCreateQuery } from '$lib/types/transaction'
+	import type { TransactionCreateInput } from '$lib/@generated/type-graphql'
 
 	const createTransactionMutation = mutation({ query: TRANSACTION_QUERY.CREATE })
 
-	const createTransaction = async (values: Record<keyof ITransactionCreateQuery, unknown>) => {
-		return createTransactionMutation(getTransactionRequest(values))
+	const createTransaction = async (values: TransactionCreateInput) => {
+		return createTransactionMutation({ data: values })
 	}
 </script>
 

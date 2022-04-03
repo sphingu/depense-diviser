@@ -8,13 +8,11 @@
 	} from '$lib/components'
 	import { URLS } from '$lib/constants'
 	import { USER_QUERY } from '$lib/services'
-
-	import type { IUser } from '$lib/types/user'
+	import type { User } from '$lib/@generated/type-graphql'
 
 	let loading = false
-	let data: { currentUser?: IUser } | undefined
+	let data: { currentUser?: User } | undefined
 	let isSetProflie = !$isAuthenticated
-
 	$: if (isSetProflie && data?.currentUser?.id) {
 		profileInfo.setProfile(data.currentUser)
 	}

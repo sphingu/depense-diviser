@@ -13,7 +13,7 @@
 
 	$: data = $request.data
 	$: loading = $request.fetching
-	$: isUnauthorized = $request.error?.graphQLErrors[0].extensions.code === 'UNAUTHORIZED'
+	$: isUnauthorized = $request.error?.response?.status === 401; //$request.error?.graphQLErrors[0].extensions.code === 'UNAUTHORIZED'
 	urqlQuery(request)
 
 	export function reload(): void {

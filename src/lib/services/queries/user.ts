@@ -1,8 +1,13 @@
 import { gql } from '@urql/svelte'
-import type { IUser, IUserCreateQuery, IUserSingleQuery, IUserUpdateQuery } from '$lib/types/user'
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import type {
+	User,
+	UserCreateInput,
+	UserUpdateInput,
+	UserWhereUniqueInput
+} from '$lib/@generated/type-graphql'
 
-export const GET_ALL: TypedDocumentNode<IUser[], undefined> = gql`
+export const GET_ALL: TypedDocumentNode<User, undefined> = gql`
 	query {
 		users {
 			id
@@ -14,7 +19,7 @@ export const GET_ALL: TypedDocumentNode<IUser[], undefined> = gql`
 	}
 `
 
-export const GET_CURRENT_USER: TypedDocumentNode<IUser, undefined> = gql`
+export const GET_CURRENT_USER: TypedDocumentNode<User, undefined> = gql`
 	query {
 		currentUser {
 			id
@@ -25,9 +30,9 @@ export const GET_CURRENT_USER: TypedDocumentNode<IUser, undefined> = gql`
 		}
 	}
 `
-export const GET_SINGLE: TypedDocumentNode<IUser, IUserSingleQuery> = gql`
-	query ($id: String!) {
-		user(id: $id) {
+export const GET_SINGLE: TypedDocumentNode<User, { where: UserWhereUniqueInput }> = gql`
+	query ($where: UserWhereUniqueInput!) {
+		user(where: $where) {
 			id
 			firstName
 			lastName
@@ -37,23 +42,26 @@ export const GET_SINGLE: TypedDocumentNode<IUser, IUserSingleQuery> = gql`
 	}
 `
 
-export const CREATE: TypedDocumentNode<IUser, IUserCreateQuery> = gql`
-	mutation ($firstName: String!, $lastName: String!, $email: String!) {
-		createUser(firstName: $firstName, lastName: $lastName, email: $email) {
+export const CREATE: TypedDocumentNode<User, { data: UserCreateInput }> = gql`
+	mutation ($data: UserCreateInput!) {
+		createUser(data: $data) {
 			id
 		}
 	}
 `
-export const UPDATE: TypedDocumentNode<IUser, IUserUpdateQuery> = gql`
-	mutation ($id: String!, $firstName: String, $lastName: String, $email: String) {
-		updateUser(id: $id, firstName: $firstName, lastName: $lastName, email: $email) {
+export const UPDATE: TypedDocumentNode<
+	User,
+	{ data: UserUpdateInput; where: UserWhereUniqueInput }
+> = gql`
+	mutation ($data: UserUpdateInput!, $where: UserWhereUniqueInput!) {
+		updateUser(data: $data, where: $where) {
 			id
 		}
 	}
 `
-export const DELETE: TypedDocumentNode<IUser, IUserSingleQuery> = gql`
-	mutation ($id: String!) {
-		deleteUser(id: $id) {
+export const DELETE: TypedDocumentNode<User, { where: UserWhereUniqueInput }> = gql`
+	mutation ($where: UserWhereUniqueInput!) {
+		deleteUser(where: $where) {
 			id
 		}
 	}

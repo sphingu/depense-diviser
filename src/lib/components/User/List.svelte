@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { Card } from '$lib/components'
-	import type { IUser } from '$lib/types/user'
+	import type { User } from '$lib/@generated/type-graphql'
 
-	export let users: IUser[] = []
+	export let users: User[] = []
 	const dispatch = createEventDispatcher()
 
-	function deleteUser(user: IUser) {
+	function deleteUser(user: User) {
 		dispatch('delete', user)
 	}
 </script>

@@ -3,29 +3,18 @@
 	import { mutation } from '@urql/svelte'
 
 	import { PageHeader, LoadData, TransactionAddEdit } from '$lib/components'
-	import { getTransactionRequest, formatTransactionResponse } from './_helpers'
 	import { TRANSACTION_QUERY } from '$lib/services'
 	import { isEmpty } from '$lib/helpers'
+	import type { Transaction, TransactionUpdateInput } from '$lib/@generated/type-graphql'
 
-	import type {
-		ITransaction,
-		ITransactionCreateQuery,
-		ITransactionSingleQuery,
-		ITransactionUpdateQuery
-	} from '$lib/types/transaction'
-
-	const variables: ITransactionSingleQuery = { id: $page.params.id }
-	let data: { transaction?: ITransaction }
+	const variables: Record<string, { id: string }> = { where: { id: $page.params.id } }
+	let data: { transaction?: Transaction }
 	let loading: boolean
 
 	const updateTransactionMutation = mutation({ query: TRANSACTION_QUERY.UPDATE })
 
-	async function updateTransaction(values: Record<keyof ITransactionCreateQuery, unknown>) {
-		return updateTransactionMutation({
-			...getTransactionRequest(values),
-			values,
-			id: variables.id
-		} as ITransactionUpdateQuery)
+	async function updateTransaction(values: TransactionUpdateInput) {
+		return updateTransactionMutation({ where: { id: variables.where.id }, data: { ...values } })
 	}
 </script>
 
@@ -35,9 +24,6 @@
 	{#if isEmpty(data.transaction)}
 		Not able to retrieve transaction information
 	{:else}
-		<TransactionAddEdit
-			transaction={formatTransactionResponse(data.transaction)}
-			onSubmit={updateTransaction}
-		/>
+		<TransactionAddEdit transaction={data.transaction} onSubmit={updateTransaction} />
 	{/if}
 </LoadData>

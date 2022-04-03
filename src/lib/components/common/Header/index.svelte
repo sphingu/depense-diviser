@@ -35,7 +35,7 @@
 							<a
 								class="navbar-item"
 								href={item.path}
-								class:is-active={$page.path === item.path}
+								class:is-active={$page.url.pathname === item.path}
 								on:click={toggleMenuVisible}
 							>
 								{#if item.iconClass}

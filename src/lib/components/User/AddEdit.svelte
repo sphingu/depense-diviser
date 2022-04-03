@@ -10,18 +10,23 @@
 	} from '$lib/components/common'
 	import { getFormFields } from './helpers'
 	import { hasAPIError } from '$lib/helpers'
+	import type { User, UserCreateInput, UserUpdateInput } from '$lib/@generated/type-graphql'
 
-	import type { IUser } from '$lib/types/user'
-
-	export let user: Partial<IUser> = {}
-	export let onSubmit: (value: Record<string, unknown>) => Promise<unknown>
+	export let user: Partial<User> = {}
+	export let onSubmit: (value: UserUpdateInput | UserCreateInput) => Promise<unknown>
 
 	$: isAdd = !user.id
 	$: submitText = isAdd ? 'Create' : 'Update'
 	$: fields = getFormFields(user)
 
 	async function submitHandler(value: Record<string, unknown>) {
-		const response = await onSubmit(value)
+		let userInfo = { ...value }
+		if (!isAdd) {
+			for (const property in userInfo) {
+				userInfo[property] = { set: userInfo[property] }
+			}
+		}
+		const response = await onSubmit(userInfo)
 		if (hasAPIError(response)) {
 			return
 		}
@@ -32,7 +37,8 @@
 </script>
 
 <Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
-	<FormField name="name" focus={true} />
+	<FormField name="firstName" focus={true} />
+	<FormField name="lastName" />
 	<FormField name="email" type="email" />
 
 	<div class="field is-grouped">

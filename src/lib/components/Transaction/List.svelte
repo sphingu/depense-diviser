@@ -1,8 +1,8 @@
 <script lang="ts">
 	import TransactionListItem from './ListItem.svelte'
-	import type { ITransaction } from '$lib/types/transaction'
+	import type { Transaction } from '$lib/@generated/type-graphql';
 
-	export let transactions: ITransaction[] = []
+	export let transactions: Transaction[] = []
 	export let expanded: boolean
 </script>
 

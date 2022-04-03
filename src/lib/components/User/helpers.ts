@@ -1,9 +1,9 @@
 import { prepareValidations } from '$lib/helpers'
 
 import type { FieldType } from '$lib/components/common/Form/types'
-import type { IUserCreateQuery } from '$lib/types/user'
+import type { User } from '$lib/@generated/type-graphql'
 
-export const getFormFields = (userInfo: Partial<IUserCreateQuery> = {}): FieldType[] => [
+export const getFormFields = (userInfo: Partial<User> = {}): FieldType[] => [
 	{
 		id: 'firstName',
 		label: 'First Name',

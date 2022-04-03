@@ -10,18 +10,17 @@
 		ExpandButton,
 		NoRecord
 	} from '$lib/components'
-	import { getMutationFn } from '$lib/helpers'
+	import type { Transaction } from '$lib/@generated/type-graphql'
+	import { mutation } from '@urql/svelte'
 
-	import type { ITransaction } from '$lib/types/transaction'
-
-	let data: { transactions?: ITransaction[] }
+	let data: { transactions?: Transaction[] }
 	let loading: boolean
 	let expanded = true
 	let reload: () => void
-	let transactionToDelete: ITransaction
-	let mutateTransaction = getMutationFn(TRANSACTION_QUERY.DELETE)
+	let transactionToDelete: Transaction
+	let mutateTransaction = mutation({ query: TRANSACTION_QUERY.DELETE })
 
-	function setDeletingTransaction(e: CustomEvent<{ transaction: ITransaction }>) {
+	function setDeletingTransaction(e: CustomEvent<{ transaction: Transaction }>) {
 		transactionToDelete = e.detail.transaction
 	}
 	function onConfirmDeleteClose(e: CustomEvent) {
@@ -31,7 +30,7 @@
 		transactionToDelete = null
 	}
 	async function deleteTransaction() {
-		return mutateTransaction({ id: transactionToDelete.id })
+		return mutateTransaction({ where: { id: transactionToDelete.id } })
 	}
 </script>
 

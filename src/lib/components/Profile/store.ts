@@ -1,11 +1,11 @@
 import { isEmpty } from '$lib/helpers'
-import type { IUser } from '$lib/types/user'
 import { derived, writable } from 'svelte/store'
+import type { User } from '$lib/@generated/type-graphql'
 
 function createProfileStore() {
-	const { subscribe, set } = writable<IUser | undefined>()
+	const { subscribe, set } = writable<User | undefined>()
 
-	const setProfile = (profile: IUser | undefined) => {
+	const setProfile = (profile: User | undefined) => {
 		set(profile)
 	}
 	return {

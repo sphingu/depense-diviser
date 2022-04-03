@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import { Card } from '$lib/components'
-	import type { ITransaction } from '$lib/types/transaction'
+	import type { Transaction } from '$lib/@generated/type-graphql';
 
 	const dispatch = createEventDispatcher()
-	export let transaction: ITransaction
+	export let transaction: Transaction
 	export let expanded: boolean
 
 	function onDelete() {
@@ -44,7 +44,7 @@
 		</span>
 		<div>
 			<span class="tag is-success is-light is-medium">
-				{transaction.payer.name}
+				{transaction.payer.email}
 			</span>
 		</div>
 		<span class="icon has-text-info-dark">
@@ -52,7 +52,7 @@
 		</span>
 		<div class="tags">
 			{#each transaction.ownedUsers as user}
-				<div class="tag mb-0 is-info is-light is-medium">{user.name}</div>
+				<div class="tag mb-0 is-info is-light is-medium">{user.email}</div>
 			{/each}
 		</div>
 		<span class="icon has-text-grey">

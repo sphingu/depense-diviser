@@ -15,20 +15,46 @@
 	import { USER_QUERY } from '$lib/services'
 	import { getString, hasAPIError } from '$lib/helpers'
 
-	import type { ITransaction } from '$lib/types/transaction'
-	import type { IUser } from '$lib/types/user'
 	import type { OptionType } from '$lib/types'
+	import type {
+		Transaction,
+		TransactionCreateInput,
+		TransactionUpdateInput,
+		User
+	} from '$lib/@generated/type-graphql'
+	// TODO: Move to dedicated helper file
+	function getTransactionUpdateRequest(values: Record<string, unknown>): TransactionUpdateInput {
+		return {
+			name: { set: values.name as string },
+			amount: { set: Number(values.amount) },
+			date: { set: new Date(values.date as string).getTime() as any },
+			payer: { connect: { id: values.payerId as string } },
+			ownedUsers: { set: (values.ownedUserIds as string[]).map((id) => ({ id })) }
+		}
+	}
+	function getTransactionCreateRequest(values: Record<string, unknown>): TransactionCreateInput {
+		return {
+			name: values.name as string,
+			amount: Number(values.amount),
+			date: new Date(values.date as string).getTime() as any,
+			payer: { connect: { id: values.payerId as string } },
+			ownedUsers: { connect: (values.ownedUserIds as string[]).map((id) => ({ id })) }
+		}
+	}
 
-	let data: { users: IUser[] }
-	export let transaction: Partial<ITransaction> = {}
-	export let onSubmit: (value: Record<string, unknown>) => Promise<unknown>
+	let data: { users: User[] }
+	export let transaction: Partial<Transaction> = {}
+	export let onSubmit: (value: TransactionCreateInput | TransactionUpdateInput) => Promise<unknown>
 
 	$: isAdd = !transaction.id
 	$: submitText = isAdd ? 'Create' : 'Update'
 	$: fields = getFormFields(transaction)
 
 	async function submitHandler(value: Record<string, unknown>) {
-		if (hasAPIError(await onSubmit(value))) {
+		let transactionInfo: TransactionCreateInput | TransactionUpdateInput = isAdd
+			? getTransactionCreateRequest({ ...value })
+			: getTransactionUpdateRequest({ ...value })
+		if (hasAPIError(await onSubmit(transactionInfo))) {
 			return
 		}
 		toastStore.successToast(`Transaction ${isAdd ? 'created' : 'updated'} successfully`)
