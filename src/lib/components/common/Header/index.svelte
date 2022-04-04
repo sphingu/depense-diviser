@@ -2,6 +2,7 @@
 	import { page } from '$app/stores'
 	import { navigationItems } from './constants'
 	import { isAuthenticated, profileInfo } from '$lib/components'
+	import { URLS } from '$lib/constants'
 
 	let isMenuVisible = false
 	let isProfileMenuVisible = false
@@ -12,7 +13,10 @@
 	const toggleProfileMenuVisibility = () => {
 		isProfileMenuVisible = !isProfileMenuVisible
 	}
-
+	const onLogoutClick = () => {
+		profileInfo.resetProfile()
+		window.location.href = URLS.GOOGLE_LOGOUT
+	}
 	// const onColorChange = (e: Event) => {
 	// 	document.documentElement.style.setProperty('--bgcolor', (e.target as HTMLInputElement).value)
 	// }
@@ -60,11 +64,14 @@
 					<div class="navbar-item has-dropdown" class:is-active={isProfileMenuVisible}>
 						<!-- svelte-ignore a11y-invalid-attribute -->
 						<a class="navbar-link" on:click={toggleProfileMenuVisibility} href="javascript:void(0)">
-							<img src={$profileInfo.imageUrl} alt="profile" />
+							<figure class="image is-32x32">
+								<img class="is-rounded" src={$profileInfo.imageUrl} alt="profile" />
+							</figure>
 						</a>
 						<div class="navbar-dropdown is-right">
-							<a class="navbar-item" href="/proflie">Profile</a>
-							<a class="navbar-item" href="/logout">Logout</a>
+							<!-- <a class="navbar-item" href="/proflie">Profile</a> -->
+							<!-- svelte-ignore a11y-invalid-attribute -->
+							<a class="navbar-item" href="javascript:void(0)" on:click={onLogoutClick}>Logout</a>
 						</div>
 					</div>
 				</div>
@@ -134,6 +141,9 @@
 	}
 	.has-dropdown.is-active .navbar-dropdown {
 		display: block;
+	}
+	.navbar-item img {
+		max-height: fit-content;
 	}
 	/* patch for profile dropdown issue end */
 </style>

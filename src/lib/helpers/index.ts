@@ -1,10 +1,14 @@
 import { toasts } from '$lib/components/common/Toast/store'
 import { mutation } from '@urql/svelte'
+
 import type { DocumentNode } from 'graphql'
 
 export * from './validations'
+
+import * as localStorage from './localStorage'
 import * as C from '$lib/constants'
 
+export { localStorage }
 export const getDateInputString = (date?: number | Date): string => {
 	if (!date) {
 		date = new Date()
