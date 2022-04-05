@@ -6,7 +6,7 @@
 	}
 </script>
 
-<div class="card">
+<div class="card custom-card">
 	<div class="card-header" on:click={toggleExpand}>
 		<slot name="header" />
 	</div>
