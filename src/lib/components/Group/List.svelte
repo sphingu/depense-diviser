@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte'
 	import type { Group } from '$lib/@generated/type-graphql'
+	import Button from '../common/Buttons/Button.svelte'
+	import { goto } from '$app/navigation'
+	import LinkButton from '../common/Buttons/LinkButton.svelte'
 
 	export let groups: Group[] = []
 	const dispatch = createEventDispatcher()
@@ -11,21 +14,30 @@
 </script>
 
 {#each groups as group}
-	<div class="card">
+	<div class="card is-clickable" on:click={() => goto(`/groups/info/${group.id}`)}>
 		<div class="card-content">
 			<div class="content">
-				<div class="columns">
-					<div class="column">
-						<h4>{group.name}</h4>
-						<span class="tag is-info is-light">Total Users: 0</span>
-						<span class="tag is-success is-light">Total Transactions: 0</span>
-					</div>
-					<div class="column is-narrow is-flex">
-						<div class="buttons">
-							<button class="button is-link is-light">Details</button>
-							<button class="button is-info is-light">Edit</button>
-							<button class="button is-danger is-light">Delete</button>
-						</div>
+				<div class="left-content">
+					<h4>{group.name}</h4>
+					<span class="tag is-info is-light">Total Users: 0</span>
+					<span class="tag is-success is-light">Total Transactions: 0</span>
+				</div>
+				<div class="right-content">
+					<div class="buttons">
+						<LinkButton className="is-danger is-light" path={`/groups/${group.id}`}>
+							<i slot="icon" class="ri-edit-fill ri-xl" />
+							Edit
+						</LinkButton>
+						<Button
+							className="is-link is-light"
+							on:click={(e) => {
+								e.stopPropagation()
+								deleteGroup(group)
+							}}
+						>
+							<i slot="icon" class="ri-delete-bin-line ri-xl" />
+							Delete
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -39,10 +51,31 @@
 			margin-bottom: 0.75rem;
 		}
 		.card-content {
-			padding: 1rem;
+			padding: 0.7rem 1rem;
 		}
 		h4 {
 			margin-bottom: 0.5rem;
+		}
+		.content {
+			display: flex;
+			flex-wrap: wrap;
+			.left-content {
+				flex-grow: 1;
+				@media screen and (max-width: 768px) {
+					flex-basis: 100%;
+					flex-grow: 1;
+				}
+			}
+			.right-content {
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+				@media screen and (max-width: 768px) {
+					flex-grow: 1;
+					justify-content: center;
+					padding-top: 0.5rem;
+				}
+			}
 		}
 	}
 </style>

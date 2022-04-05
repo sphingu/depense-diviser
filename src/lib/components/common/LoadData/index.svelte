@@ -23,7 +23,8 @@
 
 {#if $request.fetching}
 	<slot name="loading">
-		<ProgressBar />
+		LOADING
+		<!-- <ProgressBar /> -->
 	</slot>
 {:else if $request.error}
 	{#if !isUnauthorized}
