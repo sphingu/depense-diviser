@@ -19,8 +19,10 @@
 			<div class="content">
 				<div class="left-content">
 					<h4>{group.name}</h4>
-					<span class="tag is-info is-light">Total Users: 0</span>
-					<span class="tag is-success is-light">Total Transactions: 0</span>
+					<span class="tag is-info is-light">Total Users: <b>{group.users.length}</b></span>
+					<span class="tag is-success is-light"
+						>Total Transactions: <b>{group.transactions.length}</b></span
+					>
 				</div>
 				<div class="right-content">
 					<div class="buttons">
@@ -46,6 +48,12 @@
 {/each}
 
 <style lang="scss">
+	.tag {
+		b {
+			margin-left: 0.5rem;
+			font-size: 15px;
+		}
+	}
 	.card {
 		&:not(:last-child) {
 			margin-bottom: 0.75rem;

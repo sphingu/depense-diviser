@@ -3,6 +3,7 @@
 	import type { DocumentNode } from 'graphql'
 
 	import { ProgressBar, LinkButton } from '$lib/components'
+	import { profileInfo } from '$lib/components/Profile'
 
 	export let query: DocumentNode
 	export let variables: Record<string, unknown> = undefined
@@ -16,6 +17,9 @@
 	$: isUnauthorized = $request.error?.response?.status === 401 //$request.error?.graphQLErrors[0].extensions.code === 'UNAUTHORIZED'
 	urqlQuery(request)
 
+	$: if (isUnauthorized) {
+		profileInfo.resetProfile()
+	}
 	export function reload(): void {
 		$request.reexecute({ requestPolicy: 'network-only' })
 	}
