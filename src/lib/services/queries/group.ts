@@ -28,12 +28,25 @@ export const GET_SINGLE: TypedDocumentNode<Group, { where: GroupWhereUniqueInput
 		group(where: $where) {
 			id
 			name
-			isMonthlySettle
 			users {
 				id
+				firstName
+				lastName
 			}
 			transactions {
 				id
+				name
+				amount
+				payer {
+					id
+					firstName
+					lastName
+				}
+				ownedUsers {
+					id
+					firstName
+					lastName
+				}
 			}
 		}
 	}

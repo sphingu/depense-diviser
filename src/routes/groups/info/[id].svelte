@@ -2,7 +2,7 @@
 	import { page } from '$app/stores'
 
 	import { PageHeader, LoadData, Tabs } from '$lib/components'
-	import { GROUP_QUERY } from '$lib/services'
+	import { getFormattedGroupDetails, GROUP_QUERY } from '$lib/services'
 	import { isEmpty } from '$lib/helpers'
 
 	import type { Group } from '$lib/@generated/type-graphql'
@@ -13,6 +13,9 @@
 	let tabs = ['Users', 'Transactions', 'Settlement']
 
 	$: hasGroupInfo = !isEmpty(data?.group)
+	$: if (hasGroupInfo) {
+		console.log(...getFormattedGroupDetails(data.group).users.values())
+	}
 </script>
 
 <LoadData bind:loading query={GROUP_QUERY.GET_SINGLE} {variables} bind:data>

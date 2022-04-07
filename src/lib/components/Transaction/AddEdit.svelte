@@ -39,7 +39,7 @@
 			date: new Date(values.date as string).getTime() as any,
 			payer: { connect: { id: values.payerId as string } },
 			// TODO: temporary added, need to be removed
-			group: { connect: { id: '9ab5bdbe-34e4-45a1-8cc8-9da28e8cced2' } },
+			group: { connect: { id: 'fa0ce4a4-2674-4078-835d-a9339529285d' } },
 			ownedUsers: { connect: (values.ownedUserIds as string[]).map((id) => ({ id })) }
 		}
 	}

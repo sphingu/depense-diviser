@@ -19,6 +19,9 @@ export const getString = (val: number | string): string =>
 	val === null || val === undefined ? '' : val.toString()
 
 export const isEmpty = (obj: unknown): boolean => {
+	if (!obj) {
+		return true
+	}
 	return (
 		obj && // 👈 null and undefined check
 		Object.keys(obj).length === 0 &&
