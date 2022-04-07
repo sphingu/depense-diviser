@@ -5,10 +5,10 @@ import type { DocumentNode } from 'graphql'
 
 export * from './validations'
 
-import * as localStorage from './localStorage'
+import * as localStorageLib from './localStorageLib'
 import * as C from '$lib/constants'
 
-export { localStorage }
+export { localStorageLib }
 export const getDateInputString = (date?: number | Date): string => {
 	if (!date) {
 		date = new Date()

@@ -8,6 +8,7 @@ import ConfirmDeleteModal from './Modal/ConfirmDelete.svelte'
 import ProgressBar from './ProgressBar/index.svelte'
 import NoRecord from './NoRecord/index.svelte'
 import Card from './Card/index.svelte'
+import Tabs from './Tabs/index.svelte'
 
 import LinkButton from './Buttons/LinkButton.svelte'
 import BackButton from './Buttons/BackButton.svelte'
@@ -35,6 +36,7 @@ export {
 	ProgressBar,
 	NoRecord,
 	Card,
+	Tabs,
 	// buttons
 	LinkButton,
 	BackButton,
