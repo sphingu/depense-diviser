@@ -13,19 +13,17 @@
 	let tabs = ['Users', 'Transactions', 'Settlement']
 
 	$: hasGroupInfo = !isEmpty(data?.group)
-	$: if (hasGroupInfo) {
-		console.log(...getFormattedGroupDetails(data.group).users.values())
-	}
+	$: groupInfo = hasGroupInfo && getFormattedGroupDetails(data.group)
 </script>
 
 <LoadData bind:loading query={GROUP_QUERY.GET_SINGLE} {variables} bind:data>
 	{#if hasGroupInfo}
-		<PageHeader backUrl="/groups" title={data.group.name} iconClass="ri-edit-fill" />
+		<PageHeader backUrl="/groups" title={groupInfo.name} iconClass="ri-edit-fill" />
 		<nav class="level">
 			<div class="level-item has-text-centered has-background-link-light has-text-link">
 				<div class="custom-level-info">
 					<p class="heading">Transactions</p>
-					<p class="title">{data.group.transactions.length}</p>
+					<p class="title">{groupInfo.transactions.length}</p>
 				</div>
 			</div>
 			<div class="level-item has-text-centered has-background-link-light has-text-link center-item">
@@ -37,7 +35,7 @@
 			<div class="level-item has-text-centered has-background-link-light has-text-link">
 				<div class="custom-level-info">
 					<p class="heading">Users</p>
-					<p class="title">{data.group.users.length}</p>
+					<p class="title">{groupInfo.users.size}</p>
 				</div>
 			</div>
 		</nav>
@@ -45,15 +43,17 @@
 			{#if activeTab === tabs[0]}
 				<article class="panel is-link">
 					<p class="panel-heading">Users</p>
-					{#each data.group.users as user}
+					{#each [...groupInfo.users.values()] as user}
 						<div class="panel-block">
 							<div class="card is-clickable">
 								<div class="card-content">
 									<div class="columns content">
 										<div class="column">
-											{user.id}
+											{user.name}
 										</div>
-										<div class="column">spent + owed = total</div>
+										<div class="column">
+											spent({user.selfSpent}) + owed({user.owed}) = total({user.spent})
+										</div>
 									</div>
 								</div>
 							</div>
