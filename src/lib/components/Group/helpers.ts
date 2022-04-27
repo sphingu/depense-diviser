@@ -21,17 +21,20 @@ export const getFormFields = (group: Partial<Group> = {}): FieldType[] => [
 	{
 		id: 'name',
 		label: 'Name',
+		type: 'text',
 		validations: prepareValidations(true, 5, 50),
 		value: group.name || ''
 	},
 	{
 		id: 'isMonthlySettle',
 		label: 'Settle Monthly ?',
+		type: 'checkbox',
 		value: group.isMonthlySettle || false
 	},
 	{
 		id: 'userIds',
 		label: 'User',
+		type: 'multiselect',
 		validations: prepareValidations(true),
 		value: group.users?.map((user) => user.id) || []
 	}

@@ -1,16 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 
-	import {
-		Form,
-		FormField,
-		FormSubmitButton,
-		FormResetButton,
-		LoadData,
-		NoRecord,
-		LinkButton,
-		toastStore
-	} from '$lib/components'
+	import { LoadData, NoRecord, LinkButton, toastStore, Form } from '$lib/components'
 	import { getFormFields } from './helpers'
 	import { USER_QUERY } from '$lib/services'
 	import { getString, hasAPIError } from '$lib/helpers'
@@ -44,13 +35,14 @@
 		}
 	}
 
-	let data: { users: User[] }
 	export let transaction: Partial<Transaction> = {}
 	export let onSubmit: (value: TransactionCreateInput | TransactionUpdateInput) => Promise<unknown>
 
+	let initialFields = getFormFields(transaction)
+	let data: { users: User[] }
+
 	$: isAdd = !transaction.id
 	$: submitText = isAdd ? 'Create' : 'Update'
-	$: fields = getFormFields(transaction)
 
 	async function submitHandler(value: Record<string, unknown>) {
 		let transactionInfo: TransactionCreateInput | TransactionUpdateInput = isAdd
@@ -65,26 +57,15 @@
 
 	$: list =
 		data?.users.map((user) => ({ text: user.email, value: getString(user.id) } as OptionType)) || []
+	$: dropdownValues = {
+		payerId: list || [],
+		ownedUserIds: list || []
+	}
 </script>
 
 <LoadData query={USER_QUERY.GET_ALL} bind:data>
 	{#if list.length}
-		<Form initialFields={fields} onSubmit={submitHandler} let:isSubmitting>
-			<FormField name="name" focus={true} />
-			<FormField name="amount" type="number" />
-			<FormField name="date" type="date" />
-			<FormField name="payerId" type="dropdown" {list} />
-			<FormField name="ownedUserIds" type="dropdown" multiple={true} {list} />
-
-			<div class="field is-grouped">
-				<p class="control">
-					<FormSubmitButton {isSubmitting}>{submitText}</FormSubmitButton>
-				</p>
-				<p class="control">
-					<FormResetButton {isSubmitting} />
-				</p>
-			</div>
-		</Form>
+		<Form {initialFields} onSubmit={submitHandler} {submitText} {dropdownValues} />
 	{:else}
 		<NoRecord text="No users has been added yet.">
 			<LinkButton path="/users/new" className="is-fullwidth">

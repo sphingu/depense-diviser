@@ -1,57 +1,41 @@
 <script lang="ts">
-	import { setContext } from 'svelte'
+	import type { OptionType } from '$lib/types'
 
-	import { fields, isFormValid } from './store'
-	import * as C from './constants'
+	import { Form } from 'svelte-forms-lib'
+	import { FormSubmitButton, FormResetButton, FormField } from '$lib/components'
+	import { getFormProps, getLabels } from './helpers'
 
 	import type { FieldType } from './types'
 
 	export let initialFields: FieldType[]
+	export let dropdownValues: Record<string, OptionType[]> = {}
 	export let onSubmit: (values: Record<string, unknown>) => Promise<unknown>
-	let isSubmitting = false
+	export let submitText = 'Submit'
 
-	//#region Form Event Handlers
-	const handleReset = () => fields.resetAllFields()
-	const handleSubmit = () => {
-		fields.touchAllFields()
-
-		if (!$isFormValid) {
-			return
-		}
-
-		const values = Object.entries($fields).reduce(
-			(acc, [key, field]) => ({ ...acc, [key]: field.value }),
-			{}
-		)
-
-		isSubmitting = true
-
-		return onSubmit(values).finally(() => (isSubmitting = false))
-	}
-	//#endregion
-
-	//#region Input(Field) Event Handlers
-	const handleBlur = (e: Event) => {
-		const element = e.target as HTMLInputElement
-
-		fields.setTouched(element.name)
-	}
-	const handleChange = (e: Event) => {
-		const element = e.target as HTMLInputElement
-		const name = element.name
-		const value = element.type === 'checkbox' ? element.checked : element.value
-
-		fields.setValue(name, value)
-	}
-	//#endregion
-
-	$: fields.initialize(initialFields)
-
-	setContext(C.FIELD_SET_VALUE, fields.setValue)
-	setContext(C.FIELD_BLUR_EVENT, handleBlur)
-	setContext(C.FIELD_CHANGE_EVENT, handleChange)
+	const formProps = getFormProps(initialFields)
+	const labels = getLabels(initialFields)
 </script>
 
-<form on:submit|preventDefault={handleSubmit} on:reset|preventDefault={handleReset}>
-	<slot {isSubmitting} />
-</form>
+<Form {...formProps} {onSubmit}>
+	<slot name="fields" {labels}>
+		{#each initialFields as field, i}
+			<FormField
+				label={labels[field.id]}
+				name={field.id}
+				type={field.type}
+				options={dropdownValues[field.id]}
+				focus={i === 0}
+			/>
+		{/each}
+	</slot>
+	<slot name="buttons">
+		<div class="field is-grouped">
+			<p class="control">
+				<FormSubmitButton>{submitText}</FormSubmitButton>
+			</p>
+			<p class="control">
+				<FormResetButton />
+			</p>
+		</div>
+	</slot>
+</Form>
