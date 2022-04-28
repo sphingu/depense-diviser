@@ -11,5 +11,5 @@
 	}
 </script>
 
-<PageHeader backUrl="/users" title="Add User" iconClass="ri-user-add-fill" />
+<PageHeader backUrl="/user" title="Add User" iconClass="ri-user-add-fill" />
 <UserAddEdit onSubmit={addUser} />

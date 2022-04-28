@@ -20,6 +20,8 @@
 			amount: { set: Number(values.amount) },
 			date: { set: new Date(values.date as string).getTime() as any },
 			payer: { connect: { id: values.payerId as string } },
+			// not required to update group for now
+			// group: { connect: { id: groupId } },
 			ownedUsers: { set: (values.ownedUserIds as string[]).map((id) => ({ id })) }
 		}
 	}
@@ -29,12 +31,12 @@
 			amount: Number(values.amount),
 			date: new Date(values.date as string).getTime() as any,
 			payer: { connect: { id: values.payerId as string } },
-			// TODO: temporary added, need to be removed
-			group: { connect: { id: 'fa0ce4a4-2674-4078-835d-a9339529285d' } },
+			group: { connect: { id: groupId } },
 			ownedUsers: { connect: (values.ownedUserIds as string[]).map((id) => ({ id })) }
 		}
 	}
 
+	export let groupId: string
 	export let transaction: Partial<Transaction> = {}
 	export let onSubmit: (value: TransactionCreateInput | TransactionUpdateInput) => Promise<unknown>
 
@@ -52,7 +54,7 @@
 			return
 		}
 		toastStore.successToast(`Transaction ${isAdd ? 'created' : 'updated'} successfully`)
-		goto('/transactions')
+		goto(`/gorup/${groupId}/detail`)
 	}
 
 	$: list =
@@ -63,12 +65,14 @@
 	}
 </script>
 
+<!-- // TODO: Display group name label to let know user about for which group transaction going to be
+created/updated -->
 <LoadData query={USER_QUERY.GET_ALL} bind:data>
 	{#if list.length}
 		<Form {initialFields} onSubmit={submitHandler} {submitText} {dropdownValues} />
 	{:else}
 		<NoRecord text="No users has been added yet.">
-			<LinkButton path="/users/new" className="is-fullwidth">
+			<LinkButton path="/user/new" className="is-fullwidth">
 				<i slot="icon" class="ri-user-add-fill ri-xl" />
 				Add User
 			</LinkButton>

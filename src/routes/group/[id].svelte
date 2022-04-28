@@ -19,7 +19,7 @@
 	}
 </script>
 
-<PageHeader backUrl="/groups" title="Edit Group" iconClass="ri-edit-fill" />
+<PageHeader backUrl="/group" title="Edit Group" iconClass="ri-edit-fill" />
 
 <LoadData bind:loading query={GROUP_QUERY.GET_SINGLE} {variables} bind:data>
 	{#if isEmpty(data.group)}

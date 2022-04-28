@@ -4,10 +4,11 @@
 
 	export let transactions: Transaction[] = []
 	export let expanded: boolean
+	export let groupId: string
 </script>
 
 <div class="columns is-multiline is-centered">
 	{#each transactions as transaction}
-		<TransactionListItem {transaction} {expanded} on:delete />
+		<TransactionListItem {groupId} {transaction} {expanded} on:delete />
 	{/each}
 </div>

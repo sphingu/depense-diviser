@@ -31,7 +31,7 @@
 		}
 
 		toastStore.successToast(`Group ${isAdd ? 'created' : 'updated'} successfully`)
-		goto('/groups')
+		goto('/group')
 	}
 
 	$: list = data?.users.map((user) => ({ text: user.email, value: user.id } as OptionType)) || []
@@ -45,7 +45,7 @@
 		<Form {initialFields} onSubmit={submitHandler} {submitText} {dropdownValues} />
 	{:else}
 		<NoRecord text="No users has been added yet.">
-			<LinkButton path="/users/new" className="is-fullwidth">
+			<LinkButton path="/user/new" className="is-fullwidth">
 				<i slot="icon" class="ri-user-add-fill ri-xl" />
 				Add User
 			</LinkButton>

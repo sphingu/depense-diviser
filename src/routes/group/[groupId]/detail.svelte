@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 
-	import { PageHeader, LoadData, Tabs } from '$lib/components'
+	import { PageHeader, LoadData, Tabs, LinkButton } from '$lib/components'
 	import { getFormattedGroupDetails, GROUP_QUERY } from '$lib/services'
 	import { isEmpty } from '$lib/helpers'
 
 	import type { Group } from '$lib/@generated/type-graphql'
 
-	const variables: Record<string, { id: string }> = { where: { id: $page.params.id } }
+	const variables: Record<string, { id: string }> = { where: { id: $page.params.groupId } }
 	let data: { group?: Group } = {}
 	let loading: boolean
 	let tabs = ['Users', 'Transactions', 'Settlement']
@@ -18,7 +18,7 @@
 
 <LoadData bind:loading query={GROUP_QUERY.GET_SINGLE} {variables} bind:data>
 	{#if hasGroupInfo}
-		<PageHeader backUrl="/groups" title={groupInfo.name} iconClass="ri-edit-fill" />
+		<PageHeader backUrl="/group" title={groupInfo.name} iconClass="ri-edit-fill" />
 		<nav class="level">
 			<div class="level-item has-text-centered has-background-link-light has-text-link">
 				<div class="custom-level-info">
@@ -39,6 +39,7 @@
 				</div>
 			</div>
 		</nav>
+		<LinkButton path={`/group/${$page.params.groupId}/transaction/new`}>Add Transaction</LinkButton>
 		<Tabs {tabs} let:activeTab>
 			{#if activeTab === tabs[0]}
 				<article class="panel is-link">

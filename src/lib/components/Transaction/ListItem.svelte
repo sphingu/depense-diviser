@@ -6,6 +6,7 @@
 	const dispatch = createEventDispatcher()
 	export let transaction: Transaction
 	export let expanded: boolean
+	export let groupId: string
 
 	function onDelete() {
 		dispatch('delete', { transaction })
@@ -24,7 +25,7 @@
 			</div>
 		</svelte:fragment>
 		<svelte:fragment slot="footer">
-			<a href={`/transactions/${transaction.id}`} class="card-footer-item">
+			<a href={`/group/${groupId}/transaction/${transaction.id}`} class="card-footer-item">
 				<span class="icon">
 					<i class="ri-edit-fill" />
 				</span>

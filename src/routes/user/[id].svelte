@@ -19,7 +19,7 @@
 	}
 </script>
 
-<PageHeader backUrl="/users" title="Edit User" iconClass="ri-edit-fill" />
+<PageHeader backUrl="/user" title="Edit User" iconClass="ri-edit-fill" />
 
 <LoadData bind:loading query={USER_QUERY.GET_SINGLE} {variables} bind:data>
 	{#if isEmpty(data.user)}

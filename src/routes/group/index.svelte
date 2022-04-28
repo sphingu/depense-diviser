@@ -47,7 +47,7 @@
 
 {#if hasGroups}
 	<div class="block sp-space-between">
-		<LinkButton path="/groups/new">
+		<LinkButton path="/group/new">
 			<i slot="icon" class="ri-user-add-fill ri-xl" />
 			Add Group
 		</LinkButton>
@@ -64,7 +64,7 @@
 		<GroupList {groups} on:delete={setDeletingGroup} />
 	{:else}
 		<NoRecord text="No groups has been added yet.">
-			<LinkButton path="/groups/new" className="is-fullwidth">
+			<LinkButton path="/group/new" className="is-fullwidth">
 				<i slot="icon" class="ri-group-fill ri-xl" />
 				Add Group
 			</LinkButton>

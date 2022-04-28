@@ -11,5 +11,5 @@
 	}
 </script>
 
-<PageHeader backUrl="/groups" title="Add Group" iconClass="ri-user-add-fill" />
+<PageHeader backUrl="/group" title="Add Group" iconClass="ri-user-add-fill" />
 <GroupAddEdit onSubmit={addGroup} />

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { mutation } from '@urql/svelte'
 
 	import { PageHeader, TransactionAddEdit } from '$lib/components'
@@ -12,6 +13,10 @@
 	}
 </script>
 
-<PageHeader backUrl="/transactions" iconClass="ri-exchange-fill" title="Add Transaction" />
+<PageHeader
+	backUrl={`/group/${$page.params.groupId}/detail`}
+	iconClass="ri-exchange-fill"
+	title="Add Transaction"
+/>
 
-<TransactionAddEdit onSubmit={createTransaction} />
+<TransactionAddEdit groupId={$page.params.groupId} onSubmit={createTransaction} />

@@ -18,12 +18,20 @@
 	}
 </script>
 
-<PageHeader backUrl="/transactions" iconClass="ri-exchange-fill" title="Edit Transaction" />
+<PageHeader
+	backUrl={`/group/${$page.params.groupId}/detail`}
+	iconClass="ri-exchange-fill"
+	title="Edit Transaction"
+/>
 
 <LoadData bind:loading query={TRANSACTION_QUERY.GET_SINGLE} {variables} bind:data>
 	{#if isEmpty(data.transaction)}
 		Not able to retrieve transaction information
 	{:else}
-		<TransactionAddEdit transaction={data.transaction} onSubmit={updateTransaction} />
+		<TransactionAddEdit
+			groupId={$page.params.groupId}
+			transaction={data.transaction}
+			onSubmit={updateTransaction}
+		/>
 	{/if}
 </LoadData>

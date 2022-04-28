@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { mutation } from '@urql/svelte'
+	import { page } from '$app/stores'
 	import { TRANSACTION_QUERY } from '$lib/services'
 	import {
 		Button,
@@ -11,7 +13,6 @@
 		NoRecord
 	} from '$lib/components'
 	import type { Transaction } from '$lib/@generated/type-graphql'
-	import { mutation } from '@urql/svelte'
 
 	let data: { transactions?: Transaction[] }
 	let loading: boolean
@@ -44,7 +45,7 @@
 <PageHeader backUrl="/" title="Transactions" iconClass="ri-exchange-fill" />
 {#if Boolean(data?.transactions?.length)}
 	<div class="block sp-space-between">
-		<LinkButton path="/transactions/new">
+		<LinkButton path={`/group/${$page.params.groupId}/transaction/new`}>
 			<i slot="icon" class="ri-exchange-line ri-xl" />
 			Add Transaction
 		</LinkButton>
@@ -60,13 +61,14 @@
 <LoadData bind:reload bind:loading query={TRANSACTION_QUERY.GET_ALL} bind:data>
 	{#if Boolean(data?.transactions?.length)}
 		<TransactionList
+			groupId={$page.params.groupId}
 			bind:expanded
 			transactions={data?.transactions}
 			on:delete={setDeletingTransaction}
 		/>
 	{:else}
 		<NoRecord text="No transactions has been made yet.">
-			<LinkButton path="/transactions/new" className="is-fullwidth">
+			<LinkButton path={`/group/${$page.params.groupId}/transaction/new`} className="is-fullwidth">
 				<i slot="icon" class="ri-exchange-line ri-xl" />
 				Add Transaction
 			</LinkButton>

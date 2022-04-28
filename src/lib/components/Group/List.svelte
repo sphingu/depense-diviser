@@ -14,7 +14,7 @@
 </script>
 
 {#each groups as group}
-	<div class="card is-clickable" on:click={() => goto(`/groups/info/${group.id}`)}>
+	<div class="card is-clickable" on:click={() => goto(`/group/${group.id}/detail`)}>
 		<div class="card-content">
 			<div class="content">
 				<div class="left-content">
@@ -26,7 +26,7 @@
 				</div>
 				<div class="right-content">
 					<div class="buttons">
-						<LinkButton className="is-danger is-light" path={`/groups/${group.id}`}>
+						<LinkButton className="is-danger is-light" path={`/group/${group.id}`}>
 							<i slot="icon" class="ri-edit-fill ri-xl" />
 							Edit
 						</LinkButton>

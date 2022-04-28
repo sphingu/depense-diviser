@@ -22,7 +22,7 @@
 					</div>
 				</svelte:fragment>
 				<svelte:fragment slot="footer">
-					<a href={`/users/${user.id}`} class="card-footer-item">
+					<a href={`/user/${user.id}`} class="card-footer-item">
 						<span class="icon">
 							<i class="ri-edit-fill" />
 						</span>

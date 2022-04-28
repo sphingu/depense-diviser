@@ -44,7 +44,7 @@
 
 {#if Boolean(data?.users?.length)}
 	<div class="block sp-space-between">
-		<LinkButton path="/users/new">
+		<LinkButton path="/user/new">
 			<i slot="icon" class="ri-user-add-fill ri-xl" />
 			Add User
 		</LinkButton>
@@ -61,7 +61,7 @@
 		<UserList users={data.users} on:delete={setDeletingUser} />
 	{:else}
 		<NoRecord text="No users has been added yet.">
-			<LinkButton path="/users/new" className="is-fullwidth">
+			<LinkButton path="/user/new" className="is-fullwidth">
 				<i slot="icon" class="ri-user-add-fill ri-xl" />
 				Add User
 			</LinkButton>

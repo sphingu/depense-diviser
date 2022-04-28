@@ -15,19 +15,19 @@ export const navigationItems: NavigationItemType[] = [
 	},
 	{
 		iconClass: 'ri-contacts-fill',
-		path: '/users',
+		path: '/user',
 		title: 'Users',
 		prefetch: false
 	},
 	{
 		iconClass: 'ri-exchange-fill',
-		path: '/groups',
+		path: '/group',
 		title: 'Groups',
 		prefetch: false
 	}
 	// {
 	// 	iconClass: 'ri-exchange-fill',
-	// 	path: '/transactions',
+	// 	path: '/transaction',
 	// 	title: 'Transactions',
 	// 	prefetch: false
 	// }

@@ -26,7 +26,7 @@
 		}
 
 		toastStore.successToast(`User ${isAdd ? 'created' : 'updated'} successfully`)
-		goto('/users')
+		goto('/user')
 	}
 </script>
 
