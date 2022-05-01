@@ -54,7 +54,7 @@
 			return
 		}
 		toastStore.successToast(`Transaction ${isAdd ? 'created' : 'updated'} successfully`)
-		goto(`/gorup/${groupId}/detail`)
+		goto(`/group/${groupId}/detail`)
 	}
 
 	$: list =

@@ -23,6 +23,8 @@ import FormSubmitButton from './Form/SubmitButton.svelte'
 
 import LoadData from './LoadData/index.svelte'
 
+import AmountTag from './AmountTag.svelte'
+
 import { toasts as toastStore } from './Toast/store'
 
 export {
@@ -50,6 +52,8 @@ export {
 	FormSubmitButton,
 	//other
 	LoadData,
+	// simple helpers
+	AmountTag,
 	// helpers
 	toastStore
 }

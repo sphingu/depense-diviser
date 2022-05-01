@@ -15,6 +15,9 @@ export const getDateInputString = (date?: number | Date): string => {
 	}
 	return new Date(date).toJSON().split('T')[0]
 }
+export const getAbsMin = (valueA: number, valueB: number) => {
+	return Math.min(Math.abs(valueA), Math.abs(valueB))
+}
 export const getString = (val: number | string): string =>
 	val === null || val === undefined ? '' : val.toString()
 

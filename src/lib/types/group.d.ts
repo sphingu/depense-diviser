@@ -15,14 +15,16 @@ export interface IGroupTransaction {
 	paidFor: { id: string; name: string }[]
 	amount: number
 }
+export interface IGroupSettlement {
+	fromUser: { id: string; name: string }
+	toUser: { id: string; name: string }
+	amount: number
+}
 export interface IGroupDetails {
 	id: string
 	name: string
 	users: Map<string, IGroupUser>
 	transactions: IGroupTransaction[]
-	settlements: {
-		fromUser: { id: string; name: string }
-		toUser: { id: string; name: string }
-		amount: number
-	}[]
+	totalAmount: number
+	settlements: IGroupSettlement[]
 }

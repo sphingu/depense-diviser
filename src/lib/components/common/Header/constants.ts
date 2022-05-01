@@ -13,12 +13,12 @@ export const navigationItems: NavigationItemType[] = [
 		title: 'Monthly Report',
 		prefetch: true
 	},
-	{
-		iconClass: 'ri-contacts-fill',
-		path: '/user',
-		title: 'Users',
-		prefetch: false
-	},
+	// {
+	// 	iconClass: 'ri-contacts-fill',
+	// 	path: '/user',
+	// 	title: 'Users',
+	// 	prefetch: false
+	// },
 	{
 		iconClass: 'ri-exchange-fill',
 		path: '/group',
