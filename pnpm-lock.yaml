@@ -1,8 +1,11 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@fontsource/fira-mono': ^4.5.8
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.30
   '@tsconfig/svelte': ^2.0.1
+  bulma: ^0.9.3
+  remixicon: ^2.5.0
   sass: ^1.51.0
   svelte: ^3.44.0
   svelte-check: ^2.2.7
@@ -10,6 +13,11 @@ specifiers:
   tslib: ^2.3.1
   typescript: ^4.5.4
   vite: ^2.9.5
+
+dependencies:
+  '@fontsource/fira-mono': 4.5.8
+  bulma: 0.9.3
+  remixicon: 2.5.0
 
 devDependencies:
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.42_svelte@3.48.0+vite@2.9.6
@@ -23,6 +31,10 @@ devDependencies:
   vite: 2.9.6_sass@1.51.0
 
 packages:
+
+  /@fontsource/fira-mono/4.5.8:
+    resolution: {integrity: sha512-sFuSPB/Km8B1fy3CH0NqO5Nb4GmVMzp3XFaw6MwK293xhm3OnB68QJawwTTjLewcrS78wOTAhTUB058qxurJoQ==}
+    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -127,6 +139,10 @@ packages:
   /buffer-crc32/0.2.13:
     resolution: {integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=}
     dev: true
+
+  /bulma/0.9.3:
+    resolution: {integrity: sha512-0d7GNW1PY4ud8TWxdNcP6Cc8Bu7MxcntD/RRLGWuiw/s0a9P+XlH/6QoOIrmbj6o8WWJzJYhytiu9nFjTszk1g==}
+    dev: false
 
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -630,6 +646,10 @@ packages:
     dependencies:
       picomatch: 2.3.1
     dev: true
+
+  /remixicon/2.5.0:
+    resolution: {integrity: sha512-q54ra2QutYDZpuSnFjmeagmEiN9IMo56/zz5dDNitzKD23oFRw77cWo4TsrAdmdkPiEn8mxlrTqxnkujDbEGww==}
+    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
