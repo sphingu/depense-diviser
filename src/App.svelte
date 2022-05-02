@@ -1,6 +1,8 @@
 <script>
+	// @ts-nocheck
 	import './scss/app.scss'
-	import Header from '@/lib/Header.svelte'
+	import { Router } from '@roxi/routify'
+	import { routes } from '../.routify/routes'
 </script>
 
-<Header text="Depense Diviser" />
+<Router {routes} />
